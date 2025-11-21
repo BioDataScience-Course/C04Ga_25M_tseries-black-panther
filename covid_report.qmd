@@ -1,6 +1,6 @@
 ---
 title: "___"
-author: "___, ___, ___, ___"
+author: "Youmbijeanne,Tsamo voufo melvanie,Linda tchinda,Scothe steve,Masala mundambu nelly"
 format:
   pdf:
     documentclass: report
