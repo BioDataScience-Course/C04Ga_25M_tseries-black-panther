@@ -42,18 +42,25 @@ SciViews::R("ts")
 
 <!--% Ajoutez le nombre de chunks que vous souhaitez. Répartissez-vous le travail correctement. Structurez la section en partie avec des titres explicites de niveau trois.-->
 
+## importation des données et création de la série (avec les données pertinentes) 
+
 ```{r}
 mobility <- read("data/mobility_wallonia.rds")
 ```
 
 ```{r}
-mob <- ts(mobility, frequency = 365)
-
+mob_transit <- ts(mobility$transit_stations_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
+plot(mob_transit)
 ```
 
 ```{r}
-mob <- ts(mob[, "retail_and_recreation_percent_change_from_baseline"])
-plot(mob)
+mob_work <- ts(mobility$workplaces_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
+plot(mob_work)
+```
+
+```{r}
+mob_retail <- ts(mobility$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
+plot(mob_retail)
 ```
 
 ## Conclusion
