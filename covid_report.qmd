@@ -1,6 +1,6 @@
 ---
 title: "___"
-author: "Youmbijeanne,Tsamo voufo melvanie,Linda tchinda,Scothe steve,Masala mundambu nelly"
+author: "Youmbijeanne,Tsamo voufo melvanie,Linda tchinda,Sotche Merveil,Masala mundambu nelly"
 format:
   pdf:
     documentclass: report
