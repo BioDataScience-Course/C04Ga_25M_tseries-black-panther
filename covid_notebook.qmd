@@ -42,18 +42,21 @@ SciViews::R("ts")
 
 <!--% Ajoutez le nombre de chunks que vous souhaitez. Répartissez-vous le travail correctement. Structurez la section en partie avec des titres explicites de niveau trois.-->
 
-## importation des données et création de la série (avec les données pertinentes) 
+## importation des données et création de la série (avec les données pertinentes)
 
 ```{r}
 mobility <- read("data/mobility_wallonia.rds")
+
 ## jours de la semaine
 mobility$weekdays <- weekdays(as.POSIXct(mobility$date))
+
+
 
 mobility[mobility$weekdays == "Saturday" | mobility$weekdays == "Sunday" , 2:7] <- NA 
 
 mob_w <- read("data/mobility_wallonia.rds")
 mob_w$weekdays <- weekdays(as.POSIXct(mob_w$date))
-mob_w[mob_w$weekdays == "Monday" | mob_w$weekdays == "Tuesday" | mob_w$weekdays == "Wednesday" | mob_w$weekdays == "Thursday" | mob_w$weekdays == "Friday", 5:7] <- NA
+mob_w[mob_w$weekdays == "Monday" | mob_w$weekdays == "Tuesday" | mob_w$weekdays == "Wednesday" | mob_w$weekdays == "Thursday" | mob_w$weekdays == "Friday", 2:7] <- NA
 
 ```
 
@@ -61,18 +64,37 @@ mob_w[mob_w$weekdays == "Monday" | mob_w$weekdays == "Tuesday" | mob_w$weekdays 
 mob_transit <- ts(mobility$transit_stations_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_transit)
 
-mobw_ts2 <- aggregate(mobw_ts, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mobw_ts2)
+mob_tranA <- aggregate(mob_transit, 52, FUN = collapse::fmean, ts.eps = 1/52)
+plot(mob_tranA)
+```
+
+```{r}
+#voillons comment le transite est influencé par le weekend et la semaine
 ```
 
 ```{r}
 mob_work <- ts(mobility$workplaces_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_work)
+
+mob_workA <- aggregate(mob_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
+plot(mob_workA)
+```
+
+```{r}
+#travaillons avec les donné de la semaine pour les dplacement vers le lieu de travail
+mob_w_work <- ts(mob_w$workplaces_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
+plot(mob_w_work)
+
+mob_w_workA <- aggregate(mob_w_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
+plot(mob_w_workA)
+
 ```
 
 ```{r}
 mob_retail <- ts(mobility$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_retail)
+mob_retailA <- aggregate(mob_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
+plot(mob_retailA)
 ```
 
 ## Conclusion
