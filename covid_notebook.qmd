@@ -97,6 +97,50 @@ mob_retailA <- aggregate(mob_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_retailA)
 ```
 
+La série temporelle de la mobilité liée au commerce et aux loisirs montre un choc brutal et négatif au début de l’année 2020, avec une chute très marquée pouvant atteindre environ −80 %, ce qui correspond clairement à la mise en place des premières mesures de confinement liées au COVID-19. Cette période traduit un effondrement des déplacements vers les commerces et lieux de loisirs. À partir de la seconde moitié de 2020 et surtout durant l’année 2021, on observe une reprise progressive mais irrégulière, ponctuée de rechutes temporaires, reflétant l’alternance entre assouplissements et renforcements des restrictions sanitaires. En **2022**, la série se stabilise majoritairement autour de valeurs légèrement positives, indiquant un retour global à une activité proche, voire parfois supérieure, au niveau de référence pré-pandémique. La tendance générale met donc en évidence un impact fort et immédiat du COVID-19, suivi d’une résilience progressive du secteur du commerce et des loisirs, sans retrouver toutefois une trajectoire parfaitement stable sur toute la période étudiée.
+
+Analyse chronologique
+
+```{r}
+workA_trend_test <- trend.test(mob_w_workA,R = 999 ) |>
+  plot()
+```
+
+```{r}
+workA_trend_test$p.value
+```
+
+```{r}
+boot::boot.ci(workA_trend_test, conf = 0.95, type = "norm")
+```
+
+```{r}
+mob_retail.window2020 <- window(mob_retailA,start = 2020, end = 2021)
+loc.retail2021 <- local.trend(mob_retail.window2020)
+```
+
+Le graphique met en évidence une rupture nette dans l’évolution de la mobilité liée au commerce au début de l’année 2020. La courbe en pointillés (série observée) montre une chute brutale au premier trimestre 2020, traduisant un effondrement soudain de l’activité commerciale, cohérent avec une phase de restrictions fortes. La courbe rouge (somme cumulée / tendance locale) confirme cette rupture par une descente rapide vers un minimum marqué, indiquant un choc négatif important et persistant. À partir du milieu de 2020, une phase de reprise progressive apparaît, la tendance devenant clairement croissante jusqu’à la fin de l’année, ce qui suggère une adaptation progressive de l’activité commerciale. Toutefois, malgré cette amélioration, la tendance ne retrouve pas durablement son niveau initial, indiquant que l’impact du choc reste visible sur l’ensemble de la période analysée.
+
+```{r}
+trend.test(mob_retail.window2020,R = 999) |> 
+  plot()
+```
+
+Le test de tendance appliqué à la série du commerce de détail sur la période 2020–2021 montre que la statistique de test est bien centrée autour de zéro et que sa distribution est proche d’une loi normale, comme l’indiquent l’histogramme et le Q–Q plot. Cela suggère que les hypothèses du test sont respectées et que le résultat est statistiquement fiable. La position de la statistique observée par rapport à la distribution bootstrap indique l’existence d’une **tendance significative**, cohérente avec la forte chute observée au début de 2020 suivie d’une phase de reprise progressive. Cette tendance reflète donc un impact marqué du choc initial, suivi d’une dynamique de redressement du commerce de détail au cours de la période analysée.
+
+```{r}
+acf(mob_retailA)
+```
+
+Le graphique de l’ACF montre une autocorrélation très forte aux premiers retards, qui décroît progressivement tout en restant significative sur de nombreux lags. Cela indique que la série n’est pas composée d’observations indépendantes : les valeurs actuelles dépendent fortement des valeurs passées. Cette décroissance lente est typique d’une série dominée par une tendance persistante, et non d’un bruit blanc. En revanche, on n’observe pas de structure oscillante régulière, ce qui suggère l’absence de cycle saisonnier marqué à cette échelle. Cette forte autocorrélation confirme que le choc lié au COVID a eu un effet durable dans le temps sur la mobilité commerciale.
+
+```{r}
+mob_retailA_my <- tsd(mob_retailA, method = "average",order = 26, times = 3)
+plot(mob_retailA_my,col = 1:3)
+```
+
+La série originale montre une chute très brutale au début de la période, correspondant à l’impact immédiat des premières mesures liées au COVID-19, suivie d’une phase de reprise progressive mais irrégulière. La composante filtrée (courbe rouge), obtenue par une moyenne mobile d’ordre 26 répétée trois fois, met clairement en évidence une tendance de fond croissante : après l’effondrement initial, l’activité commerciale se redresse de manière lente et continue, suggérant une adaptation progressive du secteur du commerce aux contraintes sanitaires. Les résidus (barres vertes) capturent les fluctuations de court terme autour de cette tendance, avec des écarts plus marqués au début de la série, puis une variabilité qui diminue au fil du temps, indiquant une stabilisation progressive du comportement de mobilité commerciale. Globalement, cette décomposition confirme que la dynamique de long terme est dominée par un choc négatif suivi d’une récupération structurelle plutôt que par des cycles réguliers.
+
 ## Conclusion
 
 <!--% Lorsque toutes les analyses sont réalisées, terminez ce bloc-notes avec 3 à 6 phrases de conclusion en rapport avec ce que vous avez observé dans vos analyses. Quels sont les éléments les plus pertinents que vous retenez ? -->
