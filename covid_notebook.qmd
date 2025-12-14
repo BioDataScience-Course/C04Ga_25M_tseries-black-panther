@@ -20,7 +20,7 @@ lang: fr
 
 <!--% Rédigez une courte introduction de 3 ou 5 phrases qui présente vos données. Ajoutez une phrase de but. Vous devez citer la bibliographie en utilisant le formatage Markdown ad hoc et en incluant votre référence au format bibtex dans le fichier references.bib. -->
 
-... Introduction et but...
+…Dans ce projet, nous analysons une série spatio-temporelle issue des Google COVID-19 Community Mobility Reports pour la Wallonie, enregistrée quotidiennement et exprimée en variation (%) par rapport à une période de référence (baseline) \[\@google_mobility\]. Les données couvrent la période de 2020 à 2022 (avec un intérêt particulier pour 2020–2021, les années les plus marquées par les mesures sanitaires)…
 
 ## Matériel et méthodes
 
