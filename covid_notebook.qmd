@@ -28,7 +28,9 @@ Le but de ce travail est de quantifier et de caractériser l’impact de la COVI
 
 <!--% Indiquez ici d'où viennent les données et aussi quel logiciel (et version) vous utilisez pour les analyses. Inspirez-vous des projets déjà réalisés. -->
 
-...Matériel et méthodes...
+Les données proviennent du rapport sur la mobilité de la communauté mise à disposition par Google durant la période de Covid-19 et s'entendent du 15 février 2020 au 15 octobre 2022.Nous utiliserons que les données de mobilité de 2020, 2021 et 2022 pour les commerces et les loisirs ainsi que pour l'alimentation et les pharmacies.
+
+L'analyse est réalisée dans la SciViews Box 2024 dans [Saturn Cloud](https://saturncloud.io) (Linux) avec le [logiciel R](https://www.r-project.org) (`r R.version.string`) : je vais remodifier by jea
 
 ## Analyses
 
