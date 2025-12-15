@@ -120,6 +120,10 @@ workA_trend_test <- trend.test(mob_w_workA,R = 999 ) |>
   plot()
 ```
 
+on voit que La ligne verticale pointillée qui correspond à la valeur observée sur les vraies données est clairement à droite de la distribution simulée.
+
+cela signifie qu'il existe une tendance temporelle significative dans la fréquentation des lieux de travail. en plus la distribution suit la lois normale
+
 ```{r}
 workA_trend_test$p.value
 ```
