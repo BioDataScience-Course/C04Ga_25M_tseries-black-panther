@@ -69,7 +69,11 @@ mob_transit <- ts(mobility$transit_stations_percent_change_from_baseline, start 
 plot(mob_transit)
 
 mob_tranA <- aggregate(mob_transit, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_tranA)
+plot(mob_tranA, main = "Mobilité journalière – stations de transport (jours ouvrés)",
+  ylab = "Variation (%)",
+  xlab = "Temps"
+)
+abline(h = 0, col = "grey60", lty = 2)
 ```
 
 ```{r}
@@ -100,7 +104,11 @@ mob_w_work <- ts(mob_w$workplaces_percent_change_from_baseline, start = c(2020, 
 plot(mob_w_work)
 
 mob_w_workA <- aggregate(mob_w_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_w_workA)
+plot(mob_w_workA,main = "Mobilité liée aux lieux de travail en Wallonie (jours ouvrés)",
+  ylab = "Variation (%) par rapport à la période de référence",
+  xlab = "Temps"
+)
+abline(h = 0, col = "grey60", lty = 2)
 
 ```
 
@@ -108,7 +116,11 @@ plot(mob_w_workA)
 mob_retail <- ts(mobility$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_retail)
 mob_retailA <- aggregate(mob_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_retailA)
+plot(mob_retailA,main = "Mobilité liée aux commerces et loisirs en Wallonie (jours ouvrés)",
+  ylab = "Variation (%) par rapport à la période de référence",
+  xlab = "Temps"
+)
+abline(h = 0, col = "grey60", lty = 2)
 ```
 
 La série temporelle de la mobilité liée au commerce et aux loisirs montre un choc brutal et négatif au début de l’année 2020, avec une chute très marquée pouvant atteindre environ −80 %, ce qui correspond clairement à la mise en place des premières mesures de confinement liées au COVID-19. Cette période traduit un effondrement des déplacements vers les commerces et les lieux de loisirs. À partir de la seconde moitié de 2020 et surtout en 2021, on observe une reprise progressive mais irrégulière, ponctuée de rechutes temporaires, reflétant l’alternance entre assouplissements et renforcement des restrictions sanitaires. En **2022**, la série se stabilise majoritairement autour de valeurs légèrement positives, indiquant un retour global à une activité proche, voire parfois supérieure, au niveau de référence pré-pandémique. La tendance générale met donc en évidence un impact fort et immédiat du COVID-19, suivi d’une résilience progressive du secteur du commerce et des loisirs, sans pour autant retrouver une trajectoire parfaitement stable sur toute la période étudiée.
@@ -183,7 +195,7 @@ mob_tranA_trend_test <- trend.test(mob_tranA,R = 999 ) |>
   plot()
 ```
 
-```{}
+```         
 ```
 
 ## Conclusion
