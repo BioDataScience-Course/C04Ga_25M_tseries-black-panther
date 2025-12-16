@@ -66,11 +66,13 @@ mob_w[mob_w$weekdays == "Monday" | mob_w$weekdays == "Tuesday" | mob_w$weekdays 
 
 ```{r}
 mob_transit <- ts(mobility$transit_stations_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
-plot(mob_transit)
+plot(mob_transit,  main = "Mobilité journalière – stations de transport (jours ouvrés)",
+  ylab = "Variation (%)",
+  xlab = "Temps")
 
 mob_tranA <- aggregate(mob_transit, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_tranA, main = "Mobilité journalière – stations de transport (jours ouvrés)",
-  ylab = "Variation (%)",
+  ylab = "Variation % par rapport à la période de référence",
   xlab = "Temps"
 )
 abline(h = 0, col = "grey60", lty = 2)
@@ -101,7 +103,9 @@ dont Le télétravail et les restrictions ont fortement réduit la fréquentatio
 ```{r}
 #travaillons avec les donné de la semaine pour les dplacement vers le lieu de travail
 mob_w_work <- ts(mob_w$workplaces_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
-plot(mob_w_work)
+plot(mob_w_work,  main = "Mobilité liée aux lieux de travail en Wallonie (jours ouvrés)",
+  ylab = "Variation (%)",
+  xlab = "Temps")
 
 mob_w_workA <- aggregate(mob_w_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_w_workA,main = "Mobilité liée aux lieux de travail en Wallonie (jours ouvrés)",
@@ -114,7 +118,9 @@ abline(h = 0, col = "grey60", lty = 2)
 
 ```{r}
 mob_retail <- ts(mobility$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
-plot(mob_retail)
+plot(mob_retail, main = "Mobilité liée aux commerces et loisirs en Wallonie (jours ouvrés)",
+  ylab = "Variation (%)",
+  xlab = "Temps")
 mob_retailA <- aggregate(mob_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_retailA,main = "Mobilité liée aux commerces et loisirs en Wallonie (jours ouvrés)",
   ylab = "Variation (%) par rapport à la période de référence",
