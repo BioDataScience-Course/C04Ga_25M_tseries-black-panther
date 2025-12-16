@@ -49,9 +49,10 @@ SciViews::R("ts")
 ## importation des données et création de la série (avec les données pertinentes)
 
 ```{r}
+# Importation des données
 mobility <- read("data/mobility_wallonia.rds")
 
-## jours de la semaine
+# Calcul du jour de la semaine
 mobility$weekdays <- weekdays(as.POSIXct(mobility$date))
 
 
@@ -76,10 +77,6 @@ plot(mob_tranA, main = "Mobilité journalière – stations de transport (jours 
   xlab = "Temps"
 )
 abline(h = 0, col = "grey60", lty = 2)
-```
-
-```{r}
-#voyons comment le transite est influencé par le weekend et la semaine
 ```
 
 on observe une Chute très marquée début 2020.puis ensuite une forte variabilité, ensuite Une reprise partielle en 2021–2022, mais avec des baisses soudaines.
