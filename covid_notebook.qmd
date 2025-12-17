@@ -55,7 +55,7 @@ mobility <- read("data/mobility_wallonia.rds")
 # Calcul du jour de la semaine
 mobility$weekdays <- weekdays(as.POSIXct(mobility$date))
 
-
+# Calcul du jour du weekens
 
 mobility[mobility$weekdays == "Saturday" | mobility$weekdays == "Sunday" , 2:7] <- NA 
 
@@ -191,14 +191,25 @@ mob_retailA_stat <- extract(mob_retailA_diff,components = "filtered")
 dspec <- spectrum(mob_retailA_stat,spans = c(5,3))
 ```
 
-Analyse de mob_tranA by J
+Analyse de mob_tranA by j
 
 ```{r}
-mob_tranA_trend_test <- trend.test(mob_tranA,R = 999 ) |>
+mob_tranA.window2020 <- window(mob_tranA,start = 2020, end = 2021)
+loc.tran2021 <- local.trend(mob_tranA.window2020)
+```
+
+```{r}
+trend.test(mob_tranA.window2020,R = 999) |> 
   plot()
 ```
 
-```         
+```{r}
+acf(mob_tranA)
+```
+
+```{r}
+mob_mob_tranA <- tsd(mob_retailA, method = "average",order = 26, times = 3)
+plot(mob_retailA_my,col = 1:3)
 ```
 
 ## Conclusion
