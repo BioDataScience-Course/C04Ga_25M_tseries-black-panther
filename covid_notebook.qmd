@@ -183,7 +183,7 @@ mob_tranA_trend_test <- trend.test(mob_tranA,R = 999 ) |>
   plot()
 ```
 
-```{}
+```         
 ```
 
 ## Conclusion
