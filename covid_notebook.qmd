@@ -215,7 +215,7 @@ mob_workA_my <- tsd(mob_workA, method = "average",order = 26, times = 3)
 plot(mob_workA_my,col = 1:3)
 ```
 
-hkjhk
+La présence de pics statistiquement significatifs indique une dynamique temporelle marquée, probablement influencée par une structure saisonnière.
 
 ```{r}
 mob_workA_lo <- tsd(mob_workA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
