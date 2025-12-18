@@ -227,11 +227,13 @@ plot(mob_workA_lo,col = 1:4)
 ```
 
 ```{r}
-# extraction des résiduts 
+# extraction des résiduts de la methode loees
 mob_workA_statL <- extract(mob_workA_lo,components = "residuals")
 spec_w_L <- spectrum(mob_workA_statL,spans = c(5,3))
 acf(mob_workA_statL)
 ```
+
+L'absence quasi totale d'autocorrélation démontre que la série a été correctement transformée, ne laissant subsister aucun résidu structuré. Nous en déduisons qu'aucune information dynamique majeure n'a été omise. Par ailleurs, l'analyse du spectre lissé met en évidence un cycle significatif en début de période.
 
 ```{r}
 mob_workA_diff <- tsd(mob_workA, method = "diff" ,lag = 26, times = 1)
