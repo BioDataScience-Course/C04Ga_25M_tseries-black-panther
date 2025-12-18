@@ -132,11 +132,12 @@ plot(mob_w_retailA_my,col = 1:3)
 ```
 
 ```{r}
+
 mob_w_retailA_ext <- extract(mob_w_retailA_my,components = "filtered")
 spec_w_ext <- spectrum(mob_w_retailA_ext,spans = c(5,3))
 trend.test(mob_w_retailA_ext,R = 999) -> sd 
   plot(sd)
-  sd$p.value
+
 ```
 
 **mobilité lié aux lieux de travail**
@@ -157,3 +158,7 @@ plot(mob_workA_my,col = 1:3)
 ## Discussion et Conclusion
 
 <!--% En tenant compte du but de votre carnet de notes et de vos résultats, discutez de résultats et proposez des conclusions à votre analyse en 5 à 10 phrases. -->
+
+Bien que la mobilité liée au travail et aux loisirs ait progressé entre 2020 et 2022, cette hausse ne constitue pas un simple retour à la normale, car la crise a durablement fragmenté les rythmes de déplacement selon le moment de la semaine. En semaine, l'ancrage du télétravail a structurellement réduit les flux de pointe domicile-travail, tandis que les déplacements de week-end ont affiché une reprise bien plus vigoureuse et précoce, portés par un besoin accru de loisirs de proximité et de plein air.
+
+Cette dynamique asymétrique, couplée à l'anomalie statistique des confinements de 2020-2021 qui fausse les comparaisons historiques, révèle une transformation profonde des habitudes : les transports publics peinent à retrouver leur part modale face à une voiture individuelle jugée plus sûre et flexible. En Wallonie, cette dépendance automobile demeure le pivot de la mobilité, où la réduction des trajets quotidiens en semaine est largement compensée par une activité de week-end soutenue, limitant ainsi l'impact global des politiques de transition vers des modes de transport collectifs ou durables.
