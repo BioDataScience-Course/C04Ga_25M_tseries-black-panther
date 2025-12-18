@@ -321,7 +321,7 @@ On observe aucune tendance significative.
 acf(mob_w_retailA)
 ```
 
-On observe une autocorrélation initiale positive qui présente une décroissance graduelle dans le temp, jusqu'à s'estomper totalement et devenir statistiquement non significative.
+On observe une auto corrélation initiale positive qui présente une décroissance graduelle dans le temp, jusqu'à s'estomper totalement et devenir statistiquement non significative.
 
 <!--% analyse de tendance générale avec bootstrap. -->
 
@@ -361,9 +361,13 @@ trend.test(mob_tranA,R = 999) |>
   plot()
 ```
 
+on observe pas de tendance significatif
+
 ```{r}
 acf(mob_tranA)
 ```
+
+On observe une auto corrélation initiale positive qui présente une décroissance graduelle dans le temp, jusqu'à s'estomper totalement et devenir statistiquement non significative
 
 ```{r}
 mob_tranA_my <- tsd(mob_tranA, method = "average",order = 26, times = 3)
