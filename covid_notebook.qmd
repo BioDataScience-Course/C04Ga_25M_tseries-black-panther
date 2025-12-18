@@ -255,6 +255,32 @@ mob_retailA_stat <- extract(mob_retailA_diff,components = "filtered")
 dspec <- spectrum(mob_retailA_stat,spans = c(5,3))
 ```
 
+Analyse retrail pour le week-end
+
+```{r}
+loc.retail <- local.trend(mob_w_retail)
+```
+
+gerg
+
+```{r}
+trend.test(mob_w_retail,R = 999) |> 
+  plot()
+```
+
+ggtth
+
+```{r}
+acf(mob_w_retail)
+```
+
+tftf
+
+```{r}
+mob_w_retail_my <- tsd(mob_w_retail, method = "average",order = 26, times = 3)
+plot(mob_w_retail_my,col = 1:3)
+```
+
 Analyse de mob_tranA by jeanne
 
 ```{r}
