@@ -59,7 +59,7 @@ SciViews::R("ts")
 
 <!--% Ajoutez le nombre de chunks que vous souhaitez. Répartissez-vous le travail correctement. Structurez la section en partie avec des titres explicites de niveau trois.-->
 
-## importation des données et création de la série (avec les données pertinentes)
+## Analyses
 
 ```{r}
 # Importation des données
@@ -67,23 +67,24 @@ mobility <- read("data/mobility_wallonia.rds")
 
 # Calcul du jour de la semaine
 mobility$weekdays <- weekdays(as.POSIXct(mobility$date))
-
-# Calcul du jour du weekens
-
+# Les données du week-end sont remplacées par des valeurs manquantes
 mobility[mobility$weekdays == "Saturday" | mobility$weekdays == "Sunday" , 2:7] <- NA 
-
+# Calcul des  jour du week-end  
 mob_w <- read("data/mobility_wallonia.rds")
 mob_w$weekdays <- weekdays(as.POSIXct(mob_w$date))
+## Les données de la semaine  sont remplacées par des valeurs manquantes
 mob_w[mob_w$weekdays == "Monday" | mob_w$weekdays == "Tuesday" | mob_w$weekdays == "Wednesday" | mob_w$weekdays == "Thursday" | mob_w$weekdays == "Friday", 2:7] <- NA
 
 ```
 
 ```{r}
+# création de la série temporelle
 mob_transit <- ts(mobility$transit_stations_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_transit,  main = "Mobilité journalière – stations de transport (jours ouvrés)",
   ylab = "Variation (%)",
   xlab = "Temps")
 
+# Aggrégation par moyenne des valeurs par semaine
 mob_tranA <- aggregate(mob_transit, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_tranA, main = "Mobilité journalière – stations de transport (jours ouvrés)",
   ylab = "Variation % par rapport à la période de référence",
@@ -101,11 +102,12 @@ Entre 2020 et 2021, les valeurs oscillent majoritairement entre –40 % et –10
 En 2021 et 2022,. Les valeurs se rapprochent progressivement de 0 %, avec certains épisodes ponctuels proches ou légèrement supérieurs à la période de référence
 
 ```{r}
+# création de la série temporelle
 mob_w_transit <- ts(mob_w$transit_stations_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_w_transit,  main = "Mobilité journalière – stations de transport (week-ends)",
   ylab = "Variation (%)",
   xlab = "Temps")
-
+# Aggrégation par moyenne des valeurs par semaine
 mob_w_tranA <- aggregate(mob_w_transit, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_w_tranA,main = "Mobilité journalière – stations de transport (week-ends)",
   ylab = "Variation (%) par rapport à la période de référence",
@@ -118,9 +120,10 @@ abline(h = 0, col = "grey60", lty = 2)
 On observe une chute très marquée au début de l’année 2020, avec une baisse pouvant atteindre environ –70 %, correspondant aux restrictions de déplacement. Par la suite, la mobilité reste globalement inférieure à la référence tout au long de 2020 et d’une grande partie de 2021, malgré des fluctuations et des phases de reprise partielle. À partir de la mi-2021 et surtout en 2022, la mobilité augmente progressivement, dépasse parfois les valeurs positives et se stabilise à des niveaux plus élevés, traduisant une intensification, des déplacements de week-end vers les stations de transport pouvant s'expliquer par l’allègement des mesure de sécurités durant ces années.
 
 ```{r}
+# création de la série temporelle
 mob_work <- ts(mobility$workplaces_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_work)
-
+# Aggrégation par moyenne des valeurs par semaine
 mob_workA <- aggregate(mob_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_workA)
 
@@ -131,12 +134,12 @@ on observe une forte chute brutale au début de 2020.puis on a des Valeurs large
 dont Le télétravail et les restrictions ont fortement réduit la fréquentation des lieux de travail en 2020. et Le retour au bureau est progressif mais incomplet, ce qui suggère que le télétravail s’est installé durablement.
 
 ```{r}
-#travaillons avec les donné de la semaine pour les dplacement vers le lieu de travail
+# création de la série temporelle
 mob_w_work <- ts(mob_w$workplaces_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_w_work,  main = "Mobilité liée aux lieux de travail en Wallonie (week-ends)",
   ylab = "Variation (%)",
   xlab = "Temps")
-
+# Aggrégation par moyenne des valeurs par semaine
 mob_w_workA <- aggregate(mob_w_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_w_workA,main = "Mobilité liée aux lieux de travail en Wallonie (week-ends)",
   ylab = "Variation (%) par rapport à la période de référence",
@@ -149,11 +152,12 @@ abline(h = 0, col = "grey60", lty = 2)
 On observe une forte baisse au début de 2020, atteignant environ –50 %, reflétant l’impact immédiat des mesures sanitaires et du télétravail. Par la suite, la mobilité remonte progressivement mais reste globalement inférieure à la référence pendant une grande partie de 2020 et début 2021, avec des fluctuations marquées. À partir de la mi-2021, elle se rapproche puis dépasse ponctuellement le niveau de référence, indiquant une reprise partielle des activités professionnelles le week-end, malgré un nouvel épisode de baisse notable début 2022. En fin de période, la mobilité se stabilise légèrement au-dessus de la référence, suggérant un retour progressif vers des comportements proches de la normale.
 
 ```{r}
-# impact du covid en semaine 
+ # création de la série temporelle 
 mob_retail <- ts(mobility$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_retail, main = "Mobilité liée aux commerces et loisirs en Wallonie (jours ouvrés)",
   ylab = "Variation (%)",
   xlab = "Temps")
+# Aggrégation par moyenne des valeurs par semaine
 mob_retailA <- aggregate(mob_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_retailA,main = "Mobilité liée aux commerces et loisirs en Wallonie (jours ouvrés)",
   ylab = "Variation (%) par rapport à la période de référence",
@@ -165,11 +169,12 @@ abline(h = 0, col = "grey60", lty = 2)
 La série temporelle de la mobilité liée au commerce et aux loisirs montre un choc brutal et négatif au début de l’année 2020, avec une chute très marquée pouvant atteindre environ −80 %, ce qui correspond clairement à la mise en place des premières mesures de confinement liées au COVID-19. Cette période traduit un effondrement des déplacements vers les commerces et les lieux de loisirs. À partir de la seconde moitié de 2020 et surtout en 2021, on observe une reprise progressive mais irrégulière, ponctuée de rechutes temporaires, reflétant l’alternance entre assouplissements et renforcement des restrictions sanitaires. En **2022**, la série se stabilise majoritairement autour de valeurs légèrement positives, indiquant un retour global à une activité proche, voire parfois supérieure, au niveau de référence pré-pandémique. La tendance générale met donc en évidence un impact fort et immédiat du COVID-19, suivi d’une résilience progressive du secteur du commerce et des loisirs, sans pour autant retrouver une trajectoire parfaitement stable sur toute la période étudiée.
 
 ```{r}
+# création de la série temporelle
 mob_w_retail <- ts(mob_w$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_w_retail,  main = "Mobilité liée aux commerces et loisirs en Wallonie (week-ends)",
   ylab = "Variation (%)",
   xlab = "Temps")
-
+# Aggrégation par moyenne des valeurs par semaine
 mob_w_retailA <- aggregate(mob_w_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_w_retailA,main = "Mobilité liée aux commerces et loisirs en Wallonie (week-ends)",
   ylab = "Variation (%) par rapport à la période de référence",
@@ -277,18 +282,24 @@ mob_retailA_stat <- extract(mob_retailA_diff,components = "filtered")
 dspec <- spectrum(mob_retailA_stat,spans = c(5,3))
 ```
 
+\<!--% analyse de tendance locale\>
+
 ```{r}
 loc.mob_w_retailA <- local.trend(mob_w_retailA)
 ```
 
 inter
 
+<!--% analyse de tendance générale avec bootstrap. -->
+
 ```{r}
 trend.test(mob_w_retailA,R = 999) |> 
   plot()
 ```
 
-inter
+On observe une tendance significative a l’augmentation de la série initiale
+
+<!--% Graphique d'autocorrélation. -->
 
 ```{r}
 acf(mob_w_retailA)
@@ -296,12 +307,16 @@ acf(mob_w_retailA)
 
 inter
 
+<!--% analyse de tendance générale avec bootstrap. -->
+
 ```{r}
 mob_w_retailA_my <- tsd(mob_w_retailA, method = "average",order = 26, times = 3)
 plot(mob_w_retailA_my,col = 1:3)
 ```
 
 hth
+
+<!--% analyse de tendance générale avec bootstrap. -->
 
 ```{r}
 mob_w_retailA_diff <- tsd(mob_w_retailA, method = "diff" ,lag = 26, times = 1)
