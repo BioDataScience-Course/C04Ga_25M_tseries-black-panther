@@ -100,12 +100,15 @@ abline(h = 0, col = "grey60", lty = 2)
 
 ```
 
+On observe une chute très marquée au début de l’année 2020, avec une baisse pouvant atteindre environ –70 %, correspondant aux restrictions de déplacement. Par la suite, la mobilité reste globalement inférieure à la référence tout au long de 2020 et d’une grande partie de 2021, malgré des fluctuations et des phases de reprise partielle. À partir de la mi-2021 et surtout en 2022, la mobilité augmente progressivement, dépasse parfois les valeurs positives et se stabilise à des niveaux plus élevés, traduisant une intensification, des déplacements de week-end vers les stations de transport pouvant s'expliquer par l’allègement des mesure de sécurités durant ces années.
+
 ```{r}
 mob_work <- ts(mobility$workplaces_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
 plot(mob_work)
 
 mob_workA <- aggregate(mob_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_workA)
+
 ```
 
 on observe une forte chute brutale au début de 2020.puis on a des Valeurs largement négatives pendant toute l’année 2020.et une nette Amélioration progressive en 2021
