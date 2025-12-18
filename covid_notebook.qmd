@@ -92,11 +92,13 @@ plot(mob_tranA, main = "Mobilité journalière – stations de transport (jours 
 abline(h = 0, col = "grey60", lty = 2)
 ```
 
-on observe une Chute très marquée début 2020.puis ensuite une forte variabilité, ensuite Une reprise partielle en 2021–2022, mais avec des baisses soudaines.
+On observe une chute brutale et immédiate de la mobilité dans les stations de transport au début de l’année 2020. Cette diminution atteint environ –60 à –70 % par rapport à la période de référence, correspondant à la mise en place du premier confinement 
 
-dont Les transports publics ont été très fortement touchés par les confinements.
+À partir du milieu de l’année 2020, une reprise partielle est observée.
 
-Leur utilisation reste instable, probablement liée aux vagues COVID, aux mesures sanitaires et au maintien du télétravail
+Entre 2020 et 2021, les valeurs oscillent majoritairement entre –40 % et –10 %, traduisant une utilisation réduite et instable des transports publics.
+
+En 2021 et 2022,. Les valeurs se rapprochent progressivement de 0 %, avec certains épisodes ponctuels proches ou légèrement supérieurs à la période de référence
 
 ```{r}
 mob_w_transit <- ts(mob_w$transit_stations_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
