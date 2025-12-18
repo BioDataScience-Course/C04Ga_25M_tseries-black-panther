@@ -193,7 +193,11 @@ trend.test(mob_workA,R = 999) |>
   plot()
 ```
 
-GYGYGYU
+**interprétation Test par bootstrap (**mob_workA)
+
+Le test de tendance appliqué à la série hebdomadaire de la mobilité liée aux lieux de travail révèle une tendance temporelle significative (test par permutations, R = 999),car la  valeur observée se situe nettement en dehors des barres verticales
+
+en plus ,le graphique quantile-quantile correspond bien au graphique de l’histogramme ( la distribution de ρ): confirmant que les variations observées ne résultent pas d’un processus aléatoire mais traduisent une évolution structurelle de la mobilité au cours de la période COVID-19.
 
 ```{r}
 acf(mob_workA)
