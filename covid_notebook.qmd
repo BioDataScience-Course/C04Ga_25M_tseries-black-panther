@@ -144,6 +144,8 @@ abline(h = 0, col = "grey60", lty = 2)
 
 ```
 
+On observe une forte baisse au début de 2020, atteignant environ –50 %, reflétant l’impact immédiat des mesures sanitaires et du télétravail. Par la suite, la mobilité remonte progressivement mais reste globalement inférieure à la référence pendant une grande partie de 2020 et début 2021, avec des fluctuations marquées. À partir de la mi-2021, elle se rapproche puis dépasse ponctuellement le niveau de référence, indiquant une reprise partielle des activités professionnelles le week-end, malgré un nouvel épisode de baisse notable début 2022. En fin de période, la mobilité se stabilise légèrement au-dessus de la référence, suggérant un retour progressif vers des comportements proches de la normale.
+
 ```{r}
 # impact du covid en semaine 
 mob_retail <- ts(mobility$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
