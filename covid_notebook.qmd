@@ -315,7 +315,7 @@ trend.test(mob_w_retailA,R = 999) |>
   plot()
 ```
 
-On observe une tendance significative a l’augmentation de la série initiale
+On observe aucune tendance significative.
 
 <!--% Graphique d'autocorrélation. -->
 
@@ -324,7 +324,7 @@ On observe une tendance significative a l’augmentation de la série initiale
 acf(mob_w_retailA)
 ```
 
-inter
+On observe une autocorrélation initiale positive qui présente une décroissance graduelle dans le temp, jusqu'à s'estomper totalement et devenir statistiquement non significative.
 
 <!--% analyse de tendance générale avec bootstrap. -->
 
