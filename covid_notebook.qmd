@@ -131,12 +131,12 @@ dont Le télétravail et les restrictions ont fortement réduit la fréquentatio
 ```{r}
 #travaillons avec les donné de la semaine pour les dplacement vers le lieu de travail
 mob_w_work <- ts(mob_w$workplaces_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
-plot(mob_w_work,  main = "Mobilité liée aux lieux de travail en Wallonie (jours ouvrés)",
+plot(mob_w_work,  main = "Mobilité liée aux lieux de travail en Wallonie (week-ends)",
   ylab = "Variation (%)",
   xlab = "Temps")
 
 mob_w_workA <- aggregate(mob_w_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_w_workA,main = "Mobilité liée aux lieux de travail en Wallonie (jours ouvrés)",
+plot(mob_w_workA,main = "Mobilité liée aux lieux de travail en Wallonie (week-ends)",
   ylab = "Variation (%) par rapport à la période de référence",
   xlab = "Temps"
 )
