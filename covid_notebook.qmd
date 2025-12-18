@@ -218,6 +218,12 @@ plot(mob_workA_my,col = 1:3)
 La présence de pics statistiquement significatifs indique une dynamique temporelle marquée, probablement influencée par une structure saisonnière.
 
 ```{r}
+# extraction des résiduts 
+mob_workA_statM <- extract(mob_workA_my,components = "residuals")
+spec_w_M <- spectrum(mob_workA_statM,spans = c(5,3))
+```
+
+```{r}
 mob_workA_lo <- tsd(mob_workA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
 plot(mob_workA_lo,col = 1:4)
 ```
