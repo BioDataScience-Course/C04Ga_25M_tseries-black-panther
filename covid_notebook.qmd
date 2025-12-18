@@ -175,16 +175,16 @@ abline(h = 0, col = "grey60", lty = 2)
 
 ```
 
+Ce graphique montre une chute très marquée de la mobilité vers les commerces et les loisirs lors des week-ends au début de l’année 2020, atteignant environ −80 %, ce qui correspond aux premiers confinements liés à la COVID-19.\
+Par la suite, on observe une reprise progressive mais irrégulière en 2020 et 2021, avec des phases de baisse temporaires liées aux vagues successives de la pandémie et au renforcement ponctuel des restrictions.\
+À partir de 2022, la mobilité se stabilise globalement autour de valeurs proches ou légèrement supérieures à la période de référence, indiquant un retour progressif à des comportements de déplacement quasi normaux le week-end.
+
 Analyse chronologique 1
 
 ```{r}
 
 loc.workA <- local.trend(mob_workA)
 ```
-
-on voit que La ligne verticale pointillée qui correspond à la valeur observée sur les vraies données est clairement à droite de la distribution simulée.
-
-cela signifie qu'il existe une tendance temporelle significative dans la fréquentation des lieux de travail. en plus la distribution suit la lois normale
 
 ```{r}
 trend.test(mob_workA,R = 999) |> 
