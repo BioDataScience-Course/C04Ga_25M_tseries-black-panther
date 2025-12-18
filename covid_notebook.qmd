@@ -237,10 +237,12 @@ L'absence quasi totale d'autocorrélation démontre que la série a été correc
 
 ```{r}
 mob_workA_diff <- tsd(mob_workA, method = "diff" ,lag = 26, times = 1)
-plot(mob_workA_diff, col = 1:3)
+spec_w_f <- extract(mob_workA_diff,components = "residuals")
+spec_w_d <- spectrum(spec_w_f,spans = c(5,3))
+acf(spec_w_f)
 ```
 
-uuh
+on observe qu'il ya une grande auto corrélation positive des résidus , ce qui sugère une mauvaise séparation de nos données par la méthode de diff.
 
 ```{r}
 mob_workA_stat <- extract(mob_workA_diff,components = "filtered")
