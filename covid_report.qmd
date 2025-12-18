@@ -88,10 +88,20 @@ mob_tranA_lo <- tsd(mob_tranA, method = "loess", s.window = 53, trend = TRUE, ro
 plot(mob_tranA_lo,col = 1:4)
 ```
 
+La décomposition de la série temporelle réalisée à l’aide de la méthode LOESS met en évidence plusieurs composantes distinctes de l’évolution de la mobilité étudiée. La série observée présente une forte baisse au début de la période analysée, suivie d’une phase de reprise progressive, traduisant l’impact immédiat de la mise en place des premières mesures sanitaires, puis l’adaptation progressive des comportements de déplacement au cours du temps.
+
+La composante de tendance révèle une évolution globalement croissante sur l’ensemble de la période, avec une augmentation marquée après la phase initiale de perturbation. Cette tendance suggère un retour progressif vers des niveaux de mobilité plus élevés, sans toutefois retrouver immédiatement les niveaux de référence pré-pandémiques.
+
+La composante saisonnière met en évidence des fluctuations régulières autour de la tendance, dont l’amplitude reste relativement stable au cours du temps. Ces variations traduisent l’existence de cycles récurrents dans les comportements de mobilité, indépendants des évolutions de long terme, et compatibles avec des effets saisonniers ou périodiques.
+
+Enfin, les résidus apparaissent globalement centrés autour de zéro et de faible amplitude sur la majeure partie de la période, indiquant que la décomposition capture de manière satisfaisante les principales structures de la série. Les écarts plus importants observés en début de période peuvent être interprétés comme une phase transitoire liée au caractère exceptionnel et soudain des premières restrictions sanitaires.
+
 ```{r}
 mob_tranA_loE <- extract(mob_tranA_lo,components = "trend")
 dspecf <- spectrum(mob_tranA_loE,spans = c(5,3))
 ```
+
+L’analyse spectrale a été appliquée à la composante de tendance issue de la décomposition LOESS de la série **mob_tranA**. Le spectre obtenu est dominé par les basses fréquences, indiquant que la variabilité de cette composante est principalement associée à des évolutions lentes de long terme, sans périodicité marquée. Dans le cadre de cette étude, ce résultat suggère que les modifications observées de la mobilité s’inscrivent majoritairement dans une dynamique de long terme, plutôt que dans des variations rapides ou cycliques.
 
 **mobilité lié aux commerces et aux loisirs(jours ouvrés)**
 
@@ -131,8 +141,21 @@ mob_w_retailA_lo <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = 
 plot(mob_w_retailA_lo,col = 1:4)
 ```
 
+<<<<<<< HEAD
 On observe une chute très marquée au début de l’année 2020, correspondant à la mise en place du premier confinement. Cette phase est suivie d’une reprise progressive de la mobilité. Une seconde baisse, moins prononcée mais bien visible, apparaît par la suite et peut s'expliquer principalement par la propagation fulgurante du variant Omicron et le retour de mesures sanitaires restrictives, traduisant une réduction temporaire des déplacements sans atteindre l’ampleur du choc initial. et enfin on a une stabilisation vers fin 2022.
 
+=======
+<<<<<<< HEAD
+Le test de tendance montre une tendance significative : l’histogramme de la statistique t\* est centré mais clairement décalé par rapport à l’hypothèse nulle, et le QQ-plot est très proche de la droite, ce qui valide la normalité sous permutation. Cela confirme que la composante de tendance extraite par LOESS n’est pas due au hasard. En pratique, cela traduit une reprise progressive et structurelle de la mobilité liée aux commerces et aux loisirs après le choc initial du COVID, particulièrement visible après les périodes de confinement strict.
+=======
+```{r}
+
+mob_w_retailA_ext <- extract(mob_w_retailA_my,components = "filtered")
+spec_w_ext <- spectrum(mob_w_retailA_ext,spans = c(5,3))
+trend.test(mob_w_retailA_ext,R = 999) -> sd 
+  plot(sd)
+```
+>>>>>>> 8adbfbe5943bb4e7a869725afdb95d12446d54bc
 **mobilité lié aux lieux de travail**
 
 ```{r}
@@ -155,3 +178,9 @@ plot(mob_workA_my,col = 1:3)
 Bien que la mobilité liée au travail et aux loisirs ait progressé entre 2020 et 2022, cette hausse ne constitue pas un simple retour à la normale, car la crise a durablement fragmenté les rythmes de déplacement selon le moment de la semaine. En semaine, l'ancrage du télétravail a structurellement réduit les flux de pointe domicile-travail, tandis que les déplacements de week-end ont affiché une reprise bien plus vigoureuse et précoce, portés par un besoin accru de loisirs de proximité et de plein air.
 
 Cette dynamique asymétrique, couplée à l'anomalie statistique des confinements de 2020-2021 qui fausse les comparaisons historiques, révèle une transformation profonde des habitudes : les transports publics peinent à retrouver leur part modale face à une voiture individuelle jugée plus sûre et flexible. En Wallonie, cette dépendance automobile demeure le pivot de la mobilité, où la réduction des trajets quotidiens en semaine est largement compensée par une activité de week-end soutenue, limitant ainsi l'impact global des politiques de transition vers des modes de transport collectifs ou durables.
+
+Les résultats de cette étude montrent que la mobilité en Wallonie a connu une reprise progressive entre 2020 et 2022, sans toutefois retrouver pleinement les niveaux observés avant la pandémie de COVID-19. La mobilité liée aux lieux de travail demeure durablement inférieure à la période de référence, traduisant une réduction structurelle des déplacements professionnels, en grande partie liée à l’ancrage du télétravail. Cette évolution se reflète également dans la mobilité des stations de transport, dont la reprise reste incomplète et marquée par une forte variabilité, suggérant une fragilisation durable de l’usage des transports collectifs.
+
+À l’inverse, la mobilité associée aux commerces et aux loisirs présente une capacité de récupération plus rapide, avec des niveaux se rapprochant davantage de la période de référence à partir de 2021. Cette asymétrie entre mobilités professionnelles et récréatives indique une transformation des comportements de déplacement, caractérisée par une dissociation croissante entre les rythmes de la semaine et ceux du temps libre. Les confinements successifs de 2020 et 2021 ont agi comme un choc structurel, perturbant durablement les habitudes et rendant les comparaisons directes avec les périodes pré-pandémiques plus complexes.
+
+Dans ce contexte, les résultats suggèrent que la pandémie a accéléré des changements déjà amorcés, notamment une moindre dépendance aux déplacements quotidiens liés au travail et une adaptation plus rapide des mobilités de loisirs. En Wallonie, ces transformations interrogent la capacité des politiques de mobilité à favoriser une transition vers des modes de transport collectifs et durables, dans un contexte où la reprise de l’usage des transports publics demeure fragile. Globalement, la pandémie de COVID-19 apparaît ainsi comme un facteur de recomposition profonde des pratiques de mobilité, dont les effets persistent au-delà de la période de crise sanitaire.
