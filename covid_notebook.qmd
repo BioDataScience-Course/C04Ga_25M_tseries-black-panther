@@ -212,14 +212,14 @@ dspec <- spectrum(mob_workA_stat,spans = c(5,3))
 yjyg
 
 ```{r}
-mob_retail.window2020 <- window(mob_retailA,start = 2020, end = 2021)
-loc.retail2021 <- local.trend(mob_retail.window2020)
+
+loc.retailA <- local.trend(mob_retailA)
 ```
 
 Le graphique met en évidence une rupture nette dans l’évolution de la mobilité liée au commerce au début de l’année 2020. La courbe en pointillés (série observée) montre une chute brutale au premier trimestre 2020, traduisant un effondrement soudain de l’activité commerciale, cohérent avec une phase de restrictions fortes. La courbe rouge (somme cumulée / tendance locale) confirme cette rupture par une descente rapide jusqu’à un minimum marqué, ce qui indique un choc négatif important et persistant. À partir du milieu de 2020, une phase de reprise progressive apparaît, la tendance devenant nettement croissante jusqu’à la fin de l’année, ce qui suggère une adaptation progressive de l’activité commerciale. Toutefois, malgré cette amélioration, la tendance ne retrouve pas durablement son niveau initial, ce qui indique que l’impact du choc reste visible sur l’ensemble de la période analysée
 
 ```{r}
-trend.test(mob_retail.window2020,R = 999) |> 
+trend.test(mob_retailA,R = 999) |> 
   plot()
 ```
 
@@ -258,14 +258,11 @@ dspec <- spectrum(mob_retailA_stat,spans = c(5,3))
 Analyse de mob_tranA by jeanne
 
 ```{r}
-mob_tranA.window2020 <- window(mob_tranA,start = 2020, end = 2021)
-loc.tran2021 <- local.trend(mob_tranA.window2020)
+
+loc.tranA <- local.trend(mob_tranA)
 ```
 
 ```{r}
-trend.test(mob_tranA.window2020,R = 999) |> 
-  plot()
-
 trend.test(mob_tranA,R = 999) |> 
   plot()
 ```
