@@ -105,7 +105,7 @@ mob_work <- ts(mobility$workplaces_percent_change_from_baseline, start = c(2020,
 plot(mob_work)
 
 mob_workA <- aggregate(mob_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_workA)d
+plot(mob_workA)
 ```
 
 on observe une forte chute brutale au début de 2020.puis on a des Valeurs largement négatives pendant toute l’année 2020.et une nette Amélioration progressive en 2021
@@ -213,7 +213,7 @@ yjyg
 
 ```{r}
 
-loc.retailA <- local.trend(mob_retailA)d
+loc.retailA <- local.trend(mob_retailA)
 ```
 
 Le graphique met en évidence une rupture nette dans l’évolution de la mobilité liée au commerce au début de l’année 2020. La courbe en pointillés (série observée) montre une chute brutale au premier trimestre 2020, traduisant un effondrement soudain de l’activité commerciale, cohérent avec une phase de restrictions fortes. La courbe rouge (somme cumulée / tendance locale) confirme cette rupture par une descente rapide jusqu’à un minimum marqué, ce qui indique un choc négatif important et persistant. À partir du milieu de 2020, une phase de reprise progressive apparaît, la tendance devenant nettement croissante jusqu’à la fin de l’année, ce qui suggère une adaptation progressive de l’activité commerciale. Toutefois, malgré cette amélioration, la tendance ne retrouve pas durablement son niveau initial, ce qui indique que l’impact du choc reste visible sur l’ensemble de la période analysée
