@@ -113,6 +113,8 @@ mob_retail <- ts(mobility$retail_and_recreation_percent_change_from_baseline, st
 mob_retailA <- aggregate(mob_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
 ```
 
+La décomposition LOESS met en évidence une tendance globale de la mobilité liée aux commerces et aux loisirs, accompagnée de fluctuations saisonnières régulières et de résidus globalement faibles.
+
 ```{r}
 # calcul de la méthode par loes
 mob_retailA_lo <- tsd(mob_retailA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
@@ -123,6 +125,8 @@ plot(mob_retailA_lo,col = 1:4)
 mob_retailA_stat <- extract(mob_w_retailA_lo,components = "trend")
 spec <- spectrum(mob_w_retailA_stat,spans = c(5,3))
 ```
+
+L’analyse spectrale de la série de mobilité liée aux commerces et aux loisirs met en évidence une prédominance des basses fréquences, indiquant que la variabilité observée est principalement associée à des évolutions lentes de long terme. Dans le cadre de ce travail, ce résultat suggère que la pandémie a affecté la mobilité en produisant des changements structurels et progressifs, plutôt que des variations rapides ou périodiques.
 
 **mobilité lié aux commerces et aux loisirs(week-end)**
 
