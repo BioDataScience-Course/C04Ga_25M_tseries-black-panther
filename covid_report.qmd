@@ -141,21 +141,11 @@ mob_w_retailA_lo <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = 
 plot(mob_w_retailA_lo,col = 1:4)
 ```
 
-<<<<<<< HEAD
 On observe une chute très marquée au début de l’année 2020, correspondant à la mise en place du premier confinement. Cette phase est suivie d’une reprise progressive de la mobilité. Une seconde baisse, moins prononcée mais bien visible, apparaît par la suite et peut s'expliquer principalement par la propagation fulgurante du variant Omicron et le retour de mesures sanitaires restrictives, traduisant une réduction temporaire des déplacements sans atteindre l’ampleur du choc initial. et enfin on a une stabilisation vers fin 2022.
 
-=======
-<<<<<<< HEAD
-Le test de tendance montre une tendance significative : l’histogramme de la statistique t\* est centré mais clairement décalé par rapport à l’hypothèse nulle, et le QQ-plot est très proche de la droite, ce qui valide la normalité sous permutation. Cela confirme que la composante de tendance extraite par LOESS n’est pas due au hasard. En pratique, cela traduit une reprise progressive et structurelle de la mobilité liée aux commerces et aux loisirs après le choc initial du COVID, particulièrement visible après les périodes de confinement strict.
-=======
 ```{r}
-
-mob_w_retailA_ext <- extract(mob_w_retailA_my,components = "filtered")
-spec_w_ext <- spectrum(mob_w_retailA_ext,spans = c(5,3))
-trend.test(mob_w_retailA_ext,R = 999) -> sd 
-  plot(sd)
 ```
->>>>>>> 8adbfbe5943bb4e7a869725afdb95d12446d54bc
+
 **mobilité lié aux lieux de travail**
 
 ```{r}
