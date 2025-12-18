@@ -142,7 +142,7 @@ mob_w_retailA <- aggregate(mob_w_retail, 52, FUN = collapse::fmean, ts.eps = 1/5
 ```{r}
 #Analyse locale
 mob_w_retailA_lo <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
-plot(mob_w_retailA_lo,col = 1:4)
+
 ```
 
 On observe une chute très marquée au début de l’année 2020, correspondant à la mise en place du premier confinement. Cette phase est suivie d’une reprise progressive de la mobilité. Une seconde baisse, moins prononcée mais bien visible, apparaît par la suite et peut s'expliquer principalement par la propagation fulgurante du variant Omicron et le retour de mesures sanitaires restrictives, traduisant une réduction temporaire des déplacements sans atteindre l’ampleur du choc initial. et enfin on a une stabilisation vers fin 2022.
