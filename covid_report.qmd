@@ -25,6 +25,8 @@ Cette réduction de la mobilité s’est manifestée de manière marquée dans p
 
 <!--% Rédigez le but de ce rapport.-->
 
+Le but de ces analyses est de comprendre et d’expliquer l’évolution de la mobilité, ainsi que l’impact de la pandémie et des mesures anti-Covid sur cette évolution, afin d’identifier les changements observés et d’en tirer des enseignements.
+
 ## Matériel et méthodes
 
 <!--% Cette section doit comprendre deux parties. La première partie doit expliciter le données employées et la seconde traiter des analyses réalisées et des logiciels employés.-->
