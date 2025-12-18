@@ -96,7 +96,7 @@ plot(mob_w_tranA,main = "Mobilité journalière – stations de transport (week-
   ylab = "Variation (%) par rapport à la période de référence",
   xlab = "Temps"
 )
-abline(h = 0, col = "grey60", lty = 2)
+abline(h = 0, col = "grey60", lty = 2)d
 
 ```
 
@@ -105,7 +105,7 @@ mob_work <- ts(mobility$workplaces_percent_change_from_baseline, start = c(2020,
 plot(mob_work)
 
 mob_workA <- aggregate(mob_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_workA)
+plot(mob_workA)d
 ```
 
 on observe une forte chute brutale au début de 2020.puis on a des Valeurs largement négatives pendant toute l’année 2020.et une nette Amélioration progressive en 2021
@@ -124,7 +124,7 @@ plot(mob_w_workA,main = "Mobilité liée aux lieux de travail en Wallonie (jours
   ylab = "Variation (%) par rapport à la période de référence",
   xlab = "Temps"
 )
-abline(h = 0, col = "grey60", lty = 2)
+abline(h = 0, col = "grey60", lty = 2)d
 
 ```
 
