@@ -208,7 +208,7 @@ en plus ,le graphique quantile-quantile correspond bien au graphique de l’hist
 acf(mob_workA)
 ```
 
-ggrgt
+On observe plusieurs barres dépassent les bandes de confiance, ce qui confirme que ces autocorrélations sont statistiquement significatives. On observe également une remontée de l’autocorrélation à des lags plus élevés, suggérant la présence possible d’une structure périodique ou saisonnière. Dans l’ensemble, la série ne peut pas être considérée comme du bruit blanc et présente une dynamique temporelle structurée.
 
 ```{r}
 mob_workA_my <- tsd(mob_workA, method = "average",order = 26, times = 3)
