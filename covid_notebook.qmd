@@ -292,24 +292,28 @@ mob_retailA_diff <- tsd(mob_retailA, method = "diff" ,lag = 26, times = 1)
 plot(mob_retailA_diff, col = 1:3)
 ```
 
+La série montre une forte chute initiale suivie d’une reprise progressive.
+La composante filtrée met en évidence une tendance générale à la hausse après le choc initial.Les résidus indiquent des fluctuations ponctuelles, notamment autour des périodes de perturbation majeure (confinements).
+
 ```{r}
 mob_retailA_stat <- extract(mob_retailA_diff,components = "filtered")
 dspec <- spectrum(mob_retailA_stat,spans = c(5,3))
 ```
 
-**mobilité lié aux commerces et aux loisirs(week-end)w**
+Ce spectre lissé montre que l’essentiel de la variance de la série est concentré aux basses fréquences, ce qui indique une dynamique dominée par des variations lentes et de long terme plutôt que par des cycles réguliers bien marqués. Les petits pics observés à des fréquences intermédiaires suggèrent la présence de fluctuations secondaires, mais aucun cycle périodique net (hebdomadaire ou annuel) ne ressort clairement. Cela confirme que, après filtrage, la série est surtout structurée par l’évolution globale liée au contexte de la pandémie plutôt que par une saisonnalité stable.
+
+**mobilité lié aux commerces et aux loisirs(week-end)**
 
 ```{r}
 #Analyse locale
-mob_w_retailA.window2021 <- window(mob_w_retailA, start = c(2021, 45), end = c(2022, 301))
-loc.mob_w_retailA_2022 <- local.trend(mob_w_retailA.window2021)
+loc.mob_w_retailA_2022 <- local.trend(mob_w_retailA)
 ```
 
-inter
+La mobilité liée aux commerces et aux loisirs durant les week-ends montre une forte chute brutale au début de l’année 2022, traduisant l’impact immédiat des restrictions sanitaires encore en vigueur. La courbe des sommes cumulées (CUSUM) met ensuite en évidence une reprise progressive et marquée à partir du printemps 2022, indiquant un retour graduel des activités de loisirs le week-end. Cette dynamique suggère que les comportements de sortie le week-end ont été particulièrement sensibles aux mesures COVID, mais aussi rapides à se rétablir dès leur allègement.
 
 ```{r}
 #analyse de tendance générale avec bootstrap
-trend.test(mob_w_retailA.window2021,R = 999) |> 
+trend.test(mob_w_retailA,R = 999) |> 
   plot()
 ```
 
@@ -319,7 +323,7 @@ On observe aucune tendance significative.
 
 ```{r}
 #Graphique d'autocorrélation
-acf(mob_w_retailA.window2021)
+acf(mob_w_retailA)
 ```
 
 On observe une auto corrélation initiale positive qui présente une décroissance graduelle dans le temp, jusqu'à s'estomper totalement et devenir statistiquement non significative.
@@ -328,20 +332,20 @@ On observe une auto corrélation initiale positive qui présente une décroissan
 
 ```{r}
 
-mob_w_retailA_my <- tsd(mob_w_retailA.window2021, method = "average",order = 6, times = 3)
+mob_w_retailA_my <- tsd(mob_w_retailA, method = "average",order = 6, times = 3)
 plot(mob_w_retailA_my,col = 1:3)
 ```
 
-hth
+La série week-end montre une forte chute de la mobilité commerciale au début de la période analysée, correspondant à un épisode de restrictions marquées. La composante filtrée met en évidence une reprise progressive mais incomplète des déplacements, avec des fluctuations encore présentes. Les résidus restent globalement faibles, indiquant que la tendance et le lissage capturent l’essentiel de la dynamique, à l’exception de quelques chocs ponctuels.
 
 <!--% analyse de tendance générale avec bootstrap. -->
 
 ```{r}
-mob_w_retailA_diff <- tsd(mob_w_retailA.window2021, method = "diff" ,lag = 26, times = 1)
+mob_w_retailA_diff <- tsd(mob_w_retailA, method = "diff" ,lag = 26, times = 1)
 plot(mob_w_retailA_diff, col = 1:3)
 ```
 
-hhh
+Sur les week-ends, la mobilité liée au retail & loisirs montre une forte rupture négative au début de la période, suivie d’une reprise progressive. Le lissage met en évidence un redressement global, tandis que les résidus indiquent quelques chocs ponctuels, probablement liés à des changements soudains de mesures sanitaires.
 
 ```{r}
 mob_w_retailA_stat <- extract(mob_w_retailA_diff,components = "filtered")
@@ -351,9 +355,11 @@ dspec <- spectrum(mob_w_retailA_stat,spans = c(5,3))
 ytjty
 
 ```{r}
-mob_w_retailA_lo <- tsd(mob_w_retailA.window2021, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
+mob_w_retailA_lo <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
 plot(mob_w_retailA_lo,col = 1:4)
 ```
+
+La décomposition LOESS montre une tendance globale à la reprise de la mobilité liée au commerce et aux loisirs le week-end après le choc initial du COVID-19. Le cycle saisonnier reste bien marqué et stable, tandis que les résidus sont globalement faibles, indiquant que l’essentiel de la structure de la série est bien capturé.
 
 **mobilité lié aux stations de transport (jours ouvrés)**
 
