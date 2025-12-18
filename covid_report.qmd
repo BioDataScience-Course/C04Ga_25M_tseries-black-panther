@@ -25,11 +25,24 @@ Cette réduction de la mobilité s’est manifestée de manière marquée dans p
 
 <!--% Rédigez le but de ce rapport.-->
 
-Le but de ces analyses est de comprendre et d’expliquer l’évolution de la mobilité, ainsi que l’impact de la pandémie et des mesures anti-Covid sur cette évolution, afin d’identifier les changements observés et d’en tirer des enseignements.
+Le but de cette analyse est d’observer les modifications de la mobilité survenues dans le contexte de la pandémie de COVID-19, en mettant en évidence les évolutions enregistrées au cours de cette période.
 
 ## Matériel et méthodes
 
 <!--% Cette section doit comprendre deux parties. La première partie doit expliciter le données employées et la seconde traiter des analyses réalisées et des logiciels employés.-->
+
+Les données exploitées dans ce projet sont issues des *Google COVID-19 Community Mobility Reports*, qui proposent des mesures agrégées et anonymisées de la fréquentation de différents types de lieux. Ces indicateurs décrivent les variations de mobilité observées par rapport à une période de référence antérieure à la pandémie et sont exprimés en pourcentage d’écart par rapport à cette baseline. Ils permettent ainsi de caractériser l’évolution des comportements de déplacement au cours de la crise sanitaire liée à la COVID-19.
+
+Ce travail se concentre sur la région de la Wallonie et couvre la période comprise entre le 15 février 2020 et le 15 octobre 2022. L’analyse porte principalement sur les années 2020, 2021 et 2022, correspondant respectivement à une phase de perturbation majeure de la mobilité, à une période de réajustement progressif des comportements, puis à une phase marquée par un retour partiel vers des conditions plus proches de la normale.
+
+Trois aspects distincts de la mobilité ont été retenues pour l’analyse :\
+– la mobilité associée aux commerces et aux loisirs (*retail_and_recreation_percent_change_from_baseline*),\
+– la mobilité liée aux stations de transport (*transit_stations_percent_change_from_baseline*),\
+– la mobilité relative aux lieux de travail (*workplaces_percent_change_from_baseline*).
+
+Ces indicateurs ont été sélectionnés car ils traduisent de manière directe les effets des mesures sanitaires et des adaptations organisationnelles mises en place durant la pandémie, telles que les confinements, le télétravail et les restrictions de déplacement, sur les pratiques de mobilité quotidienne.
+
+L’ensemble des analyses a été réalisé à l’aide du langage **R** (version : r R.version.string), dans l’environnement **SciViews Box 2024**, exécuté sur la plateforme **Saturn Cloud** sous système **Linux**. Les traitements effectués comprennent la préparation et la manipulation des données, la construction et l’agrégation de séries temporelles, ainsi que les analyses statistiques nécessaires à l’étude de l’évolution de la mobilité.
 
 ## Résultats
 
@@ -80,6 +93,11 @@ abline(h = 0, col = "grey60", lty = 2)
 # calcul de la méthode par loes
 mob_tranA_lo <- tsd(mob_tranA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
 plot(mob_tranA_lo,col = 1:4)
+```
+
+```{r}
+mob_tranA_loE <- extract(mob_tranA_lo,components = "trend")
+dspecf <- spectrum(mob_tranA_loE,spans = c(5,3))
 ```
 
 **mobilité lié aux commerces et aux loisirs(jours ouvrés)**
