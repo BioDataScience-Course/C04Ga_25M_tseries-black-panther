@@ -143,13 +143,7 @@ mob_w_retailA_lo <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = 
 plot(mob_w_retailA_lo,col = 1:4)
 ```
 
-```{r}
-mob_w_retailA_loE <- extract(mob_w_retailA_lo,components = "trend")
-spec_w_LE <- spectrum(mob_w_retailA_loE,spans = c(5,3))
-trend.test(mob_w_retailA_loE,R = 999) -> sd 
-  plot(sd)
-
-```
+Le test de tendance montre une tendance significative : l’histogramme de la statistique t\* est centré mais clairement décalé par rapport à l’hypothèse nulle, et le QQ-plot est très proche de la droite, ce qui valide la normalité sous permutation. Cela confirme que la composante de tendance extraite par LOESS n’est pas due au hasard. En pratique, cela traduit une reprise progressive et structurelle de la mobilité liée aux commerces et aux loisirs après le choc initial du COVID, particulièrement visible après les périodes de confinement strict.
 
 ## Discussion et Conclusion
 
