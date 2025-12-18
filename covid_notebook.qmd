@@ -189,11 +189,6 @@ On observe une chute très importante de la mobilité vers les commerces et les 
 **mobilité lié aux lieux de travail**
 
 ```{r}
-
-loc.workA <- local.trend(mob_workA)
-```
-
-```{r}
 trend.test(mob_workA,R = 999) |> 
   plot()
 ```
@@ -356,11 +351,6 @@ plot(mob_w_retailA_lo,col = 1:4)
 ```
 
 **mobilité lié aux stations de transport (jours ouvrés)**
-
-```{r}
-
-loc.tranA <- local.trend(mob_tranA)
-```
 
 ```{r}
 trend.test(mob_tranA,R = 999) |> 
