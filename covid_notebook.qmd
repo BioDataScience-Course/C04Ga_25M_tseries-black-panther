@@ -28,9 +28,22 @@ Le but de ce travail est de quantifier et de caractériser l’impact de la COVI
 
 <!--% Indiquez ici d'où viennent les données et aussi quel logiciel (et version) vous utilisez pour les analyses. Inspirez-vous des projets déjà réalisés. -->
 
-Les données proviennent du rapport sur la mobilité de la communauté mise à disposition par Google durant la période de Covid-19 et s'entendent du 15 février 2020 au 15 octobre 2022.Nous utiliserons que les données de mobilité de 2020, 2021 et 2022 pour les commerces et les loisirs ainsi que pour l'alimentation et les pharmacies.
+Les données utilisées dans cette étude proviennent des Google COVID-19 Community Mobility Reports, qui fournissent des indicateurs agrégés et anonymisés décrivant l’évolution de la fréquentation de différents types de lieux par rapport à une période de référence pré-pandémique. Ces données sont exprimées en pourcentage de variation par rapport à cette baseline et permettent d’analyser les modifications des comportements de déplacement au cours de la pandémie de COVID-19.
 
-L'analyse est réalisée dans la SciViews Box 2024 dans [Saturn Cloud](https://saturncloud.io) (Linux) avec le [logiciel R](https://www.r-project.org) (`r R.version.string`) : je vais remodifier by jea
+Dans le cadre de ce travail, nous nous concentrons sur les données relatives à la Wallonie, couvrant la période allant du 15 février 2020 au 15 octobre 2022. L’analyse porte principalement sur les années 2020, 2021 et 2022, correspondant respectivement à la phase de perturbation maximale liée à la pandémie, à une période d’adaptation progressive, puis à une phase de retour partiel vers une situation plus proche de la normale.
+
+Trois catégories de mobilité ont été retenues pour l’analyse :
+
+la mobilité liée aux commerces et aux loisirs(retail_and_recreation_percent_change_from_baseline)\
+\
+la mobilité liée aux stations detransport,(transit_stations_percent_change_from_baseline)\
+\
+la mobilité liée aux lieux de travail.(workplaces_percent_change_from_baseline)\
+\
+
+Ces indicateurs ont été choisis car ils reflètent directement l’impact des mesures sanitaires et des changements organisationnels (confinements, télétravail, restrictions de déplacement) sur les déplacements quotidiens.
+
+L’ensemble des analyses a été réalisé à l’aide du langage R (version : r R.version.string) dans l’environnement SciViews Box 2024, exécuté sur la plateforme Saturn Cloud sous système Linux. Les traitements incluent la manipulation des données, la construction de séries temporelles, l’agrégation temporelle et les analyses statistiques nécessaires à l’étude de l’évolution de la mobilité.
 
 ## Analyses
 
