@@ -17,6 +17,10 @@ lang: fr
 
 <!--% Rédigez l'introduction de ce rapport.-->
 
+La crise sanitaire liée à la COVID-19 a entraîné une transformation majeure des comportements de mobilité. Afin de contenir la diffusion du virus, les autorités ont instauré diverses mesures restrictives, parmi lesquelles les périodes de confinement, la généralisation du télétravail et la limitation des déplacements. Ces dispositifs ont conduit à une baisse significative des flux de déplacement, en particulier en direction des espaces collectifs et des environnements professionnels.
+
+Cette réduction de la mobilité s’est manifestée de manière marquée dans plusieurs secteurs, notamment les déplacements associés aux activités commerciales et récréatives, aux lieux de travail ainsi qu’à l’utilisation des transports publics. L’intensité de ces évolutions n’a cependant pas été constante, mais a suivi les différentes phases de la pandémie, évoluant au rythme des contraintes sanitaires et de leur levée progressive.
+
 ## But
 
 <!--% Rédigez le but de ce rapport.-->
