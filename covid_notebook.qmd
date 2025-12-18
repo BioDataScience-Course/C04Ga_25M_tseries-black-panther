@@ -409,4 +409,10 @@ Cette décomposition LOESS montre une forte chute initiale de la fréquentation 
 
 <!--% Lorsque toutes les analyses sont réalisées, terminez ce bloc-notes avec 3 à 6 phrases de conclusion en rapport avec ce que vous avez observé dans vos analyses. Quels sont les éléments les plus pertinents que vous retenez ? -->
 
+<<<<<<< HEAD
 ...Les analyses de séries chronologiques menées sur les variables *Retail and Recreation*, *Workplaces* et *Transit Stations* montrent un impact marqué et durable de la pandémie de COVID-19 sur la mobilité en Wallonie. L’année 2020 se caractérise par des ruptures brutales et des chutes importantes de mobilité, clairement visibles dans les tendances, les composantes filtrées et les résidus, en lien direct avec les confinements et restrictions sanitaires. En 2021, une reprise progressive est observée pour les trois variables, bien que les niveaux restent inférieurs à la situation pré-pandémique, en particulier pour les lieux de travail et les stations de transport. Les analyses spectrales et les décompositions LOESS mettent en évidence la persistance de cycles hebdomadaires, traduisant la structuration de la mobilité par les rythmes de travail et de loisirs, malgré les perturbations. Enfin, 2022 apparaît comme une phase de stabilisation, marquant une normalisation progressive des comportements de déplacement, tout en conservant certaines traces structurelles des changements induits par la pandémie....
+=======
+...vos conclusions ici...
+
+## référence
+>>>>>>> 74cc456234a2950cba0128d444c73f18ecb2cb85
