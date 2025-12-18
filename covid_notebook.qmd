@@ -139,7 +139,7 @@ plot(mob_retailA,main = "Mobilité liée aux commerces et loisirs en Wallonie (j
   ylab = "Variation (%) par rapport à la période de référence",
   xlab = "Temps"
 )
-abline(h = 0, col = "grey60", lty = 2)
+abline(h = 0, col = "grey60", lty = 2)d
 ```
 
 La série temporelle de la mobilité liée au commerce et aux loisirs montre un choc brutal et négatif au début de l’année 2020, avec une chute très marquée pouvant atteindre environ −80 %, ce qui correspond clairement à la mise en place des premières mesures de confinement liées au COVID-19. Cette période traduit un effondrement des déplacements vers les commerces et les lieux de loisirs. À partir de la seconde moitié de 2020 et surtout en 2021, on observe une reprise progressive mais irrégulière, ponctuée de rechutes temporaires, reflétant l’alternance entre assouplissements et renforcement des restrictions sanitaires. En **2022**, la série se stabilise majoritairement autour de valeurs légèrement positives, indiquant un retour global à une activité proche, voire parfois supérieure, au niveau de référence pré-pandémique. La tendance générale met donc en évidence un impact fort et immédiat du COVID-19, suivi d’une résilience progressive du secteur du commerce et des loisirs, sans pour autant retrouver une trajectoire parfaitement stable sur toute la période étudiée.
@@ -155,7 +155,7 @@ plot(mob_w_retailA,main = "Mobilité liée aux commerces et loisirs en Wallonie 
   ylab = "Variation (%) par rapport à la période de référence",
   xlab = "Temps"
 )
-abline(h = 0, col = "grey60", lty = 2)
+abline(h = 0, col = "grey60", lty = 2)d
 
 ```
 
@@ -163,7 +163,7 @@ Analyse chronologique 1
 
 ```{r}
 
-loc.workA <- local.trend(mob_workA)
+loc.workA <- local.trend(mob_workA)d
 ```
 
 on voit que La ligne verticale pointillée qui correspond à la valeur observée sur les vraies données est clairement à droite de la distribution simulée.
@@ -172,55 +172,55 @@ cela signifie qu'il existe une tendance temporelle significative dans la fréque
 
 ```{r}
 trend.test(mob_workA,R = 999) |> 
-  plot()
+  plot()d
 ```
 
 GYGYGYU
 
 ```{r}
-acf(mob_workA)
+acf(mob_workA)d
 ```
 
 ggrgt
 
 ```{r}
 mob_workA_my <- tsd(mob_workA, method = "average",order = 26, times = 3)
-plot(mob_workA_my,col = 1:3)
+plot(mob_workA_my,col = 1:3)d
 ```
 
 hkjhk
 
 ```{r}
 mob_workA_lo <- tsd(mob_workA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
-plot(mob_workA_lo,col = 1:4)
+plot(mob_workA_lo,col = 1:4)d
 ```
 
 euv
 
 ```{r}
 mob_workA_diff <- tsd(mob_workA, method = "diff" ,lag = 26, times = 1)
-plot(mob_workA_diff, col = 1:3)
+plot(mob_workA_diff, col = 1:3)d
 ```
 
 uuh
 
 ```{r}
 mob_workA_stat <- extract(mob_workA_diff,components = "filtered")
-dspec <- spectrum(mob_workA_stat,spans = c(5,3))
+dspec <- spectrum(mob_workA_stat,spans = c(5,3))d
 ```
 
 yjyg
 
 ```{r}
 
-loc.retailA <- local.trend(mob_retailA)
+loc.retailA <- local.trend(mob_retailA)d
 ```
 
 Le graphique met en évidence une rupture nette dans l’évolution de la mobilité liée au commerce au début de l’année 2020. La courbe en pointillés (série observée) montre une chute brutale au premier trimestre 2020, traduisant un effondrement soudain de l’activité commerciale, cohérent avec une phase de restrictions fortes. La courbe rouge (somme cumulée / tendance locale) confirme cette rupture par une descente rapide jusqu’à un minimum marqué, ce qui indique un choc négatif important et persistant. À partir du milieu de 2020, une phase de reprise progressive apparaît, la tendance devenant nettement croissante jusqu’à la fin de l’année, ce qui suggère une adaptation progressive de l’activité commerciale. Toutefois, malgré cette amélioration, la tendance ne retrouve pas durablement son niveau initial, ce qui indique que l’impact du choc reste visible sur l’ensemble de la période analysée
 
 ```{r}
 trend.test(mob_retailA,R = 999) |> 
-  plot()
+  plot()d
 ```
 
 Le test de tendance appliqué à la série du commerce de détail sur la période 2020–2021 montre que la statistique de test est bien centrée autour de zéro et que sa distribution est proche d’une loi normale, comme l’indiquent l’histogramme et le Q–Q plot. Cela suggère que les hypothèses du test sont vérifiées et que le résultat est statistiquement fiable. La position de la statistique observée par rapport à la distribution bootstrap indique l’existence d’une **tendance significative**, cohérente avec la forte chute observée au début de 2020 suivie d’une phase de reprise progressive. Cette tendance reflète donc un impact marqué du choc initial, suivi d’une dynamique de redressement du commerce de détail au cours de la période analysée.
@@ -256,84 +256,84 @@ dspec <- spectrum(mob_retailA_stat,spans = c(5,3))
 ```
 
 ```{r}
-loc.mob_w_retailA <- local.trend(mob_w_retailA)
+loc.mob_w_retailA <- local.trend(mob_w_retailA)d
 ```
 
 inter
 
 ```{r}
 trend.test(mob_w_retailA,R = 999) |> 
-  plot()
+  plot()d
 ```
 
 inter
 
 ```{r}
-acf(mob_w_retailA)
+acf(mob_w_retailA)d
 ```
 
 inter
 
 ```{r}
 mob_w_retailA_my <- tsd(mob_w_retailA, method = "average",order = 26, times = 3)
-plot(mob_w_retailA_my,col = 1:3)
+plot(mob_w_retailA_my,col = 1:3)d
 ```
 
 hth
 
 ```{r}
 mob_w_retailA_diff <- tsd(mob_w_retailA, method = "diff" ,lag = 26, times = 1)
-plot(mob_w_retailA_diff, col = 1:3)
+plot(mob_w_retailA_diff, col = 1:3)d
 ```
 
 hhh
 
 ```{r}
 mob_w_retailA_stat <- extract(mob_w_retailA_diff,components = "filtered")
-dspec <- spectrum(mob_w_retailA_stat,spans = c(5,3))
+dspec <- spectrum(mob_w_retailA_stat,spans = c(5,3))d
 ```
 
 ytjty
 
 ```{r}
 mob_w_retailA_lo <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
-plot(mob_w_retailA_lo,col = 1:4)
+plot(mob_w_retailA_lo,col = 1:4)d
 ```
 
 Analyse de mob_tranA by jeanne
 
 ```{r}
 
-loc.tranA <- local.trend(mob_tranA)
+loc.tranA <- local.trend(mob_tranA)d
 ```
 
 ```{r}
 trend.test(mob_tranA,R = 999) |> 
-  plot()
+  plot()d
 ```
 
 ```{r}
-acf(mob_tranA)
+acf(mob_tranA)d
 ```
 
 ```{r}
 mob_tranA_my <- tsd(mob_tranA, method = "average",order = 26, times = 3)
-plot(mob_tranA_my,col = 1:3)
+plot(mob_tranA_my,col = 1:3)d
 ```
 
 ```{r}
 mob_tranA_diff <- tsd(mob_tranA, method = "diff" ,lag = 26, times = 1)
-plot(mob_tranA_diff, col = 1:3)
+plot(mob_tranA_diff, col = 1:3)d
 ```
 
 ```{r}
 mob_tranA_stat <- extract(mob_tranA_diff,components = "filtered")
-dspec <- spectrum(mob_tranA_stat,spans = c(5,3))
+dspec <- spectrum(mob_tranA_stat,spans = c(5,3))d
 ```
 
 ```{r}
 mob_tranA_lo <- tsd(mob_tranA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
-plot(mob_tranA_lo,col = 1:4)
+plot(mob_tranA_lo,col = 1:4)d
 ```
 
 ## Conclusion
