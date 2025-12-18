@@ -226,6 +226,8 @@ mob_workA_lo <- tsd(mob_workA, method = "loess", s.window = 53, trend = TRUE, ro
 plot(mob_workA_lo,col = 1:4)
 ```
 
+La décomposition LOESS de la mobilité liée aux *workplaces* met en évidence une forte baisse initiale correspondant aux périodes de confinement, suivie d’une reprise progressive mais incomplète. La tendance reste négative sur l’ensemble de la période, traduisant un maintien durable du télétravail. La composante saisonnière révèle des fluctuations régulières (rythme hebdomadaire), tandis que les résidus montrent surtout des chocs ponctuels liés à des changements de mesures sanitaires.
+
 ```{r}
 # extraction des résiduts de la methode loees
 mob_workA_statL <- extract(mob_workA_lo,components = "residuals")
@@ -249,7 +251,7 @@ mob_workA_stat <- extract(mob_workA_diff,components = "filtered")
 dspec <- spectrum(mob_workA_stat,spans = c(5,3))
 ```
 
-yjyg
+l’analyse spectrale met en évidence une énergie dominante aux **basses fréquences**, indiquant que la dynamique est surtout gouvernée par des variations de long terme plutôt que par des cycles courts réguliers. Cela reflète l’impact durable du télétravail et des mesures sanitaires, avec une modification structurelle des déplacements professionnels. Les cycles hebdomadaires existent mais restent secondaires par rapport à cette tendance de fond induite par la pandémie.
 
 **mobilité lié aux commerces et aux loisirs(jours ouvrés)**
 
