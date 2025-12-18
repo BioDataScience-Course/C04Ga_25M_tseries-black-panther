@@ -226,6 +226,8 @@ mob_workA_lo <- tsd(mob_workA, method = "loess", s.window = 53, trend = TRUE, ro
 plot(mob_workA_lo,col = 1:4)
 ```
 
+La décomposition LOESS de la mobilité liée aux *workplaces* met en évidence une forte baisse initiale correspondant aux périodes de confinement, suivie d’une reprise progressive mais incomplète. La tendance reste négative sur l’ensemble de la période, traduisant un maintien durable du télétravail. La composante saisonnière révèle des fluctuations régulières (rythme hebdomadaire), tandis que les résidus montrent surtout des chocs ponctuels liés à des changements de mesures sanitaires.
+
 ```{r}
 # extraction des résiduts de la methode loees
 mob_workA_statL <- extract(mob_workA_lo,components = "residuals")
@@ -249,7 +251,7 @@ mob_workA_stat <- extract(mob_workA_diff,components = "filtered")
 dspec <- spectrum(mob_workA_stat,spans = c(5,3))
 ```
 
-yjyg
+l’analyse spectrale met en évidence une énergie dominante aux **basses fréquences**, indiquant que la dynamique est surtout gouvernée par des variations de long terme plutôt que par des cycles courts réguliers. Cela reflète l’impact durable du télétravail et des mesures sanitaires, avec une modification structurelle des déplacements professionnels. Les cycles hebdomadaires existent mais restent secondaires par rapport à cette tendance de fond induite par la pandémie.
 
 **mobilité lié aux commerces et aux loisirs(jours ouvrés)**
 
@@ -292,8 +294,7 @@ mob_retailA_diff <- tsd(mob_retailA, method = "diff" ,lag = 26, times = 1)
 plot(mob_retailA_diff, col = 1:3)
 ```
 
-La série montre une forte chute initiale suivie d’une reprise progressive.
-La composante filtrée met en évidence une tendance générale à la hausse après le choc initial.Les résidus indiquent des fluctuations ponctuelles, notamment autour des périodes de perturbation majeure (confinements).
+La série montre une forte chute initiale suivie d’une reprise progressive. La composante filtrée met en évidence une tendance générale à la hausse après le choc initial.Les résidus indiquent des fluctuations ponctuelles, notamment autour des périodes de perturbation majeure (confinements).
 
 ```{r}
 mob_retailA_stat <- extract(mob_retailA_diff,components = "filtered")
@@ -352,7 +353,7 @@ mob_w_retailA_stat <- extract(mob_w_retailA_diff,components = "filtered")
 dspec <- spectrum(mob_w_retailA_stat,spans = c(5,3))
 ```
 
-ytjty
+Le spectre lissé de la série différenciée montre une énergie principalement concentrée aux basses fréquences, indiquant que la dynamique est dominée par des variations lentes plutôt que par des cycles courts marqués. Aucun pic spectral net ne ressort, ce qui suggère l’absence de cycle périodique fortement dominant après la différenciation. Cela confirme que la transformation a efficacement réduit la tendance, mais au prix d’une atténuation des composantes cycliques.
 
 ```{r}
 mob_w_retailA_lo <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
@@ -381,20 +382,28 @@ mob_tranA_my <- tsd(mob_tranA, method = "average",order = 26, times = 3)
 plot(mob_tranA_my,col = 1:3)
 ```
 
+La série de mobilité liée aux stations de transport en jours ouvrés montre une forte chute initiale, correspondant aux restrictions strictes du début de la pandémie, suivie d’une reprise progressive mais incomplète. Le lissage par moyenne mobile (ordre 26) met en évidence une tendance globale croissante, traduisant la reprise graduelle des déplacements professionnels avec l’assouplissement des mesures sanitaires. Les résidus restent modérés mais révèlent encore des perturbations ponctuelles, suggérant des chocs temporaires liés aux vagues épidémiques ou aux changements de politiques de mobilité.
+
 ```{r}
 mob_tranA_diff <- tsd(mob_tranA, method = "diff" ,lag = 26, times = 1)
 plot(mob_tranA_diff, col = 1:3)
 ```
+
+La série de mobilité dans les stations de transport en jours ouvrés montre une chute brutale au début de la période, correspondant aux restrictions sanitaires, suivie d’une reprise progressive mais incomplète. Le filtrage met en évidence une tendance haussière de long terme, tandis que la différenciation supprime cette tendance et révèle surtout des fluctuations de court terme liées aux ajustements successifs des mesures et des comportements de déplacement.
 
 ```{r}
 mob_tranA_stat <- extract(mob_tranA_diff,components = "filtered")
 dspec <- spectrum(mob_tranA_stat,spans = c(5,3))
 ```
 
+Ce spectre lissé montre que l’essentiel de l’énergie du signal est concentré aux basses fréquences, ce qui indique une dynamique dominée par des variations de long terme plutôt que par des cycles courts marqués. Les pics aux fréquences plus élevées sont faibles et peu structurés, suggérant l’absence de cycles saisonniers forts dans les résidus après différenciation. La série filtrée se rapproche donc d’un comportement faiblement cyclique, proche d’un bruit corrélé de basse fréquence.
+
 ```{r}
 mob_tranA_lo <- tsd(mob_tranA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
 plot(mob_tranA_lo,col = 1:4)
 ```
+
+Cette décomposition LOESS montre une forte chute initiale de la fréquentation des stations de transport, suivie d’une reprise progressive et durable au fil du temps. La tendance reflète un retour graduel vers des niveaux plus élevés, cohérent avec l’allègement des restrictions et la reprise des déplacements professionnels. La saisonnalité hebdomadaire reste marquée, tandis que les résidus, globalement faibles, indiquent que la tendance et la saisonnalité expliquent l’essentiel de la dynamique observée.
 
 ## Conclusion
 
