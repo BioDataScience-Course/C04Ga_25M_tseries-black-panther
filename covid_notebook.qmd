@@ -294,8 +294,7 @@ mob_retailA_diff <- tsd(mob_retailA, method = "diff" ,lag = 26, times = 1)
 plot(mob_retailA_diff, col = 1:3)
 ```
 
-La série montre une forte chute initiale suivie d’une reprise progressive.
-La composante filtrée met en évidence une tendance générale à la hausse après le choc initial.Les résidus indiquent des fluctuations ponctuelles, notamment autour des périodes de perturbation majeure (confinements).
+La série montre une forte chute initiale suivie d’une reprise progressive. La composante filtrée met en évidence une tendance générale à la hausse après le choc initial.Les résidus indiquent des fluctuations ponctuelles, notamment autour des périodes de perturbation majeure (confinements).
 
 ```{r}
 mob_retailA_stat <- extract(mob_retailA_diff,components = "filtered")
