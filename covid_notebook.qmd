@@ -221,7 +221,10 @@ La présence de pics statistiquement significatifs indique une dynamique tempore
 # extraction des résiduts 
 mob_workA_statM <- extract(mob_workA_my,components = "residuals")
 spec_w_M <- spectrum(mob_workA_statM,spans = c(5,3))
+acf(mob_workA_statM)
 ```
+
+Nous observons une autocorrelation presque nulle avec une présence de cycle. donc notre série à bien été fragmenté et nous n'observons pas de données significatif perdu. pour ce qui est de spectre lissé nous observons 2 cycles significatifs.
 
 ```{r}
 mob_workA_lo <- tsd(mob_workA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
