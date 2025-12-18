@@ -20,7 +20,7 @@ lang: fr
 
 <!--% Rédigez une courte introduction de 3 ou 5 phrases qui présente vos données. Ajoutez une phrase de but. Vous devez citer la bibliographie en utilisant le formatage Markdown ad hoc et en incluant votre référence au format bibtex dans le fichier references.bib. -->
 
-...La pandémie de COVID-19 a profondément modifié les comportements de mobilité des populations, notamment à la suite des mesures sanitaires mises en place pour limiter la propagation du virus. Dans ce projet, nous analysons une série spatio-temporelle issue des Google COVID-19 Community Mobility Reports pour la Wallonie, enregistrée quotidiennement et exprimée en variation (%) par rapport à une période de référence (baseline) \[\@google_mobility\]. Les données couvrent la période de 2020 à 2022 (avec un intérêt particulier pour 2020–2021, les années les plus marquées par les mesures sanitaires). Nous avons choisi de nous concentrer principalement sur trois variables, à savoir **Retail and Recreation**, **Workplaces** et **Transit Stations**. Ces trois variables sont particulièrement pertinentes pour notre étude car elles reflètent directement l’impact des restrictions sanitaires sur l’activité économique, le travail et les transports publics, trois dimensions fortement affectées durant la pandémie. Elles permettent ainsi de mettre en évidence, de manière claire et contrastée, les effets des confinements, du télétravail et de la reprise progressive des activités.
+...La pandémie de COVID-19 a profondément modifié les comportements de mobilité des populations, notamment à la suite des mesures sanitaires mises en place pour limiter la propagation du virus. Dans ce projet, nous analysons une série spatio-temporelle issue des Google COVID-19 Community Mobility Reports pour la Wallonie, enregistrée quotidiennement et exprimée en variation (%) par rapport à une période de référence (baseline) \[\@google_mobility\]. Les données couvrent la période de 2020 à 2022 (avec un intérêt particulier pour 2020–2021, les années les plus marquées par les mesures sanitaires). Nous avons choisi de nous concentrer principalement sur quatre variables, à savoir **Retail and Recreation**, **Workplaces**, **Transit Stations et Grocery and pharmacy**. Ces variables sont particulièrement pertinentes pour notre étude car elles reflètent directement l’impact des restrictions sanitaires sur l’activité économique, le travail et les transports publics, trois dimensions fortement affectées durant la pandémie. Elles permettent ainsi de mettre en évidence, de manière claire et contrastée, les effets des confinements, du télétravail et de la reprise progressive des activités.
 
 Le but de ce travail est de quantifier et de caractériser l’impact de la COVID-19 sur la mobilité en Wallonie à l’aide des méthodes d’analyse et de décomposition des séries chronologiques, en comparant les périodes 2020, 2021 et 2022…
 
@@ -32,17 +32,15 @@ Les données utilisées dans cette étude proviennent des Google COVID-19 Commun
 
 Dans le cadre de ce travail, nous nous concentrons sur les données relatives à la Wallonie, couvrant la période allant du 15 février 2020 au 15 octobre 2022. L’analyse porte principalement sur les années 2020, 2021 et 2022, correspondant respectivement à la phase de perturbation maximale liée à la pandémie, à une période d’adaptation progressive, puis à une phase de retour partiel vers une situation plus proche de la normale.
 
-Trois catégories de mobilité ont été retenues pour l’analyse :
+Trois catégories de mobilité ont été retenues pour l’analyse
 
--   la mobilité liée aux commerces et aux loisirs(retail_and_recreation_percent_change_from_baseline)\
-    \
+-   la mobilité liée aux commerces et aux loisirs(retail_and_recreation_percent_change_from_baseline)
 
--   la mobilité liée aux stations detransport,(transit_stations_percent_change_from_baseline)\
-    \
+-   la mobilité liée aux stations detransport,(transit_stations_percent_change_from_baseline)
 
 -   la mobilité liée aux lieux de travail.(workplaces_percent_change_from_baseline)\
 
--    L’ensemble des analyses a été réalisé à l’aide du langage R (version : r R.version.string) dans l’environnement SciViews Box 2024, exécuté sur la plateforme Saturn Cloud sous système Linux. Les traitements incluent la manipulation des données, la construction de séries temporelles, l’agrégation temporelle et les analyses statistiques nécessaires à l’étude de l’évolution de la mobilité.
+L’ensemble des analyses a été réalisé à l’aide du langage R (version : r R.version.string) dans l’environnement SciViews Box 2024, exécuté sur la plateforme Saturn Cloud sous système Linux. Les traitements incluent la manipulation des données, la construction de séries temporelles, l’agrégation temporelle et les analyses statistiques nécessaires à l’étude de l’évolution de la mobilité.
 
 ## Analyses
 
@@ -61,13 +59,12 @@ SciViews::R("ts")
 ## importation des données et création de la série (avec les données pertinentes)
 
 ```{r}
-# Importation des données
 mobility <- read("data/mobility_wallonia.rds")
 
-# Calcul du jour de la semaine
+## jours de la semaine
 mobility$weekdays <- weekdays(as.POSIXct(mobility$date))
 
-# Calcul du jour du weekens
+
 
 mobility[mobility$weekdays == "Saturday" | mobility$weekdays == "Sunday" , 2:7] <- NA 
 
@@ -79,37 +76,14 @@ mob_w[mob_w$weekdays == "Monday" | mob_w$weekdays == "Tuesday" | mob_w$weekdays 
 
 ```{r}
 mob_transit <- ts(mobility$transit_stations_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
-plot(mob_transit,  main = "Mobilité journalière – stations de transport (jours ouvrés)",
-  ylab = "Variation (%)",
-  xlab = "Temps")
+plot(mob_transit)
 
 mob_tranA <- aggregate(mob_transit, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_tranA, main = "Mobilité journalière – stations de transport (jours ouvrés)",
-  ylab = "Variation % par rapport à la période de référence",
-  xlab = "Temps"
-)
-abline(h = 0, col = "grey60", lty = 2)
+plot(mob_tranA)
 ```
 
-on observe une Chute très marquée début 2020.puis ensuite une forte variabilité, ensuite Une reprise partielle en 2021–2022, mais avec des baisses soudaines.
-
-dont Les transports publics ont été très fortement touchés par les confinements.
-
-Leur utilisation reste instable, probablement liée aux vagues COVID, aux mesures sanitaires et au maintien du télétravail
-
 ```{r}
-mob_w_transit <- ts(mob_w$transit_stations_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
-plot(mob_w_transit,  main = "Mobilité journalière – stations de transport (week-ends)",
-  ylab = "Variation (%)",
-  xlab = "Temps")
-
-mob_w_tranA <- aggregate(mob_w_transit, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_w_tranA,main = "Mobilité journalière – stations de transport (week-ends)",
-  ylab = "Variation (%) par rapport à la période de référence",
-  xlab = "Temps"
-)
-abline(h = 0, col = "grey60", lty = 2)
-
+#voillons comment le transite est influencé par le weekend et la semaine
 ```
 
 ```{r}
@@ -120,118 +94,49 @@ mob_workA <- aggregate(mob_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
 plot(mob_workA)
 ```
 
-on observe une forte chute brutale au début de 2020.puis on a des Valeurs largement négatives pendant toute l’année 2020.et une nette Amélioration progressive en 2021
-
-dont Le télétravail et les restrictions ont fortement réduit la fréquentation des lieux de travail en 2020. et Le retour au bureau est progressif mais incomplet, ce qui suggère que le télétravail s’est installé durablement.
-
 ```{r}
 #travaillons avec les donné de la semaine pour les dplacement vers le lieu de travail
 mob_w_work <- ts(mob_w$workplaces_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
-plot(mob_w_work,  main = "Mobilité liée aux lieux de travail en Wallonie (jours ouvrés)",
-  ylab = "Variation (%)",
-  xlab = "Temps")
+plot(mob_w_work)
 
 mob_w_workA <- aggregate(mob_w_work, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_w_workA,main = "Mobilité liée aux lieux de travail en Wallonie (jours ouvrés)",
-  ylab = "Variation (%) par rapport à la période de référence",
-  xlab = "Temps"
-)
-abline(h = 0, col = "grey60", lty = 2)
+plot(mob_w_workA)
 
 ```
 
 ```{r}
-# impact du covid en semaine 
 mob_retail <- ts(mobility$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
-plot(mob_retail, main = "Mobilité liée aux commerces et loisirs en Wallonie (jours ouvrés)",
-  ylab = "Variation (%)",
-  xlab = "Temps")
+plot(mob_retail)
 mob_retailA <- aggregate(mob_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_retailA,main = "Mobilité liée aux commerces et loisirs en Wallonie (jours ouvrés)",
-  ylab = "Variation (%) par rapport à la période de référence",
-  xlab = "Temps"
-)
-abline(h = 0, col = "grey60", lty = 2)
+plot(mob_retailA)
 ```
 
 La série temporelle de la mobilité liée au commerce et aux loisirs montre un choc brutal et négatif au début de l’année 2020, avec une chute très marquée pouvant atteindre environ −80 %, ce qui correspond clairement à la mise en place des premières mesures de confinement liées au COVID-19. Cette période traduit un effondrement des déplacements vers les commerces et les lieux de loisirs. À partir de la seconde moitié de 2020 et surtout en 2021, on observe une reprise progressive mais irrégulière, ponctuée de rechutes temporaires, reflétant l’alternance entre assouplissements et renforcement des restrictions sanitaires. En **2022**, la série se stabilise majoritairement autour de valeurs légèrement positives, indiquant un retour global à une activité proche, voire parfois supérieure, au niveau de référence pré-pandémique. La tendance générale met donc en évidence un impact fort et immédiat du COVID-19, suivi d’une résilience progressive du secteur du commerce et des loisirs, sans pour autant retrouver une trajectoire parfaitement stable sur toute la période étudiée.
 
-```{r}
-mob_w_retail <- ts(mob_w$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
-plot(mob_w_retail,  main = "Mobilité liée aux commerces et loisirs en Wallonie (week-ends)",
-  ylab = "Variation (%)",
-  xlab = "Temps")
-
-mob_w_retailA <- aggregate(mob_w_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
-plot(mob_w_retailA,main = "Mobilité liée aux commerces et loisirs en Wallonie (week-ends)",
-  ylab = "Variation (%) par rapport à la période de référence",
-  xlab = "Temps"
-)
-abline(h = 0, col = "grey60", lty = 2)
-
-```
-
-Analyse chronologique 1
+Analyse chronologique
 
 ```{r}
-
-loc.workA <- local.trend(mob_workA)
-```
-
-on voit que La ligne verticale pointillée qui correspond à la valeur observée sur les vraies données est clairement à droite de la distribution simulée.
-
-cela signifie qu'il existe une tendance temporelle significative dans la fréquentation des lieux de travail. en plus la distribution suit la lois normale
-
-```{r}
-trend.test(mob_workA,R = 999) |> 
+workA_trend_test <- trend.test(mob_w_workA,R = 999 ) |>
   plot()
 ```
 
-GYGYGYU
-
 ```{r}
-acf(mob_workA)
+workA_trend_test$p.value
 ```
 
-ggrgt
-
 ```{r}
-mob_workA_my <- tsd(mob_workA, method = "average",order = 26, times = 3)
-plot(mob_workA_my,col = 1:3)
+boot::boot.ci(workA_trend_test, conf = 0.95, type = "norm")
 ```
 
-hkjhk
-
 ```{r}
-mob_workA_lo <- tsd(mob_workA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
-plot(mob_workA_lo,col = 1:4)
+mob_retail.window2020 <- window(mob_retailA,start = 2020, end = 2021)
+loc.retail2021 <- local.trend(mob_retail.window2020)
 ```
 
-euv
+Le graphique met en évidence une rupture nette dans l’évolution de la mobilité liée au commerce au début de l’année 2020. La courbe en pointillés (série observée) montre une chute brutale au premier trimestre 2020, traduisant un effondrement soudain de l’activité commerciale, cohérent avec une phase de restrictions fortes. La courbe rouge (somme cumulée / tendance locale) confirme cette rupture par une descente rapide jusqu’à un minimum marqué, ce qui indique un choc négatif important et persistant. À partir du milieu de 2020, une phase de reprise progressive apparaît, la tendance devenant nettement croissante jusqu’à la fin de l’année, ce qui suggère une adaptation progressive de l’activité commerciale. Toutefois, malgré cette amélioration, la tendance ne retrouve pas durablement son niveau initial, ce qui indique que l’impact du choc reste visible sur l’ensemble de la période analysée.
 
 ```{r}
-mob_workA_diff <- tsd(mob_workA, method = "diff" ,lag = 26, times = 1)
-plot(mob_workA_diff, col = 1:3)
-```
-
-uuh
-
-```{r}
-mob_workA_stat <- extract(mob_workA_diff,components = "filtered")
-dspec <- spectrum(mob_workA_stat,spans = c(5,3))
-```
-
-yjyg
-
-```{r}
-
-loc.retailA <- local.trend(mob_retailA)
-```
-
-Le graphique met en évidence une rupture nette dans l’évolution de la mobilité liée au commerce au début de l’année 2020. La courbe en pointillés (série observée) montre une chute brutale au premier trimestre 2020, traduisant un effondrement soudain de l’activité commerciale, cohérent avec une phase de restrictions fortes. La courbe rouge (somme cumulée / tendance locale) confirme cette rupture par une descente rapide jusqu’à un minimum marqué, ce qui indique un choc négatif important et persistant. À partir du milieu de 2020, une phase de reprise progressive apparaît, la tendance devenant nettement croissante jusqu’à la fin de l’année, ce qui suggère une adaptation progressive de l’activité commerciale. Toutefois, malgré cette amélioration, la tendance ne retrouve pas durablement son niveau initial, ce qui indique que l’impact du choc reste visible sur l’ensemble de la période analysée
-
-```{r}
-trend.test(mob_retailA,R = 999) |> 
+trend.test(mob_retail.window2020,R = 999) |> 
   plot()
 ```
 
@@ -265,87 +170,6 @@ plot(mob_retailA_diff, col = 1:3)
 ```{r}
 mob_retailA_stat <- extract(mob_retailA_diff,components = "filtered")
 dspec <- spectrum(mob_retailA_stat,spans = c(5,3))
-```
-
-```{r}
-loc.mob_w_retailA <- local.trend(mob_w_retailA)
-```
-
-inter
-
-```{r}
-trend.test(mob_w_retailA,R = 999) |> 
-  plot()
-```
-
-inter
-
-```{r}
-acf(mob_w_retailA)
-```
-
-inter
-
-```{r}
-mob_w_retailA_my <- tsd(mob_w_retailA, method = "average",order = 26, times = 3)
-plot(mob_w_retailA_my,col = 1:3)
-```
-
-hth
-
-```{r}
-mob_w_retailA_diff <- tsd(mob_w_retailA, method = "diff" ,lag = 26, times = 1)
-plot(mob_w_retailA_diff, col = 1:3)
-```
-
-hhh
-
-```{r}
-mob_w_retailA_stat <- extract(mob_w_retailA_diff,components = "filtered")
-dspec <- spectrum(mob_w_retailA_stat,spans = c(5,3))
-```
-
-ytjty
-
-```{r}
-mob_w_retailA_lo <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
-plot(mob_w_retailA_lo,col = 1:4)
-```
-
-Analyse de mob_tranA by jeanne
-
-```{r}
-
-loc.tranA <- local.trend(mob_tranA)
-```
-
-```{r}
-trend.test(mob_tranA,R = 999) |> 
-  plot()
-```
-
-```{r}
-acf(mob_tranA)
-```
-
-```{r}
-mob_tranA_my <- tsd(mob_tranA, method = "average",order = 26, times = 3)
-plot(mob_tranA_my,col = 1:3)
-```
-
-```{r}
-mob_tranA_diff <- tsd(mob_tranA, method = "diff" ,lag = 26, times = 1)
-plot(mob_tranA_diff, col = 1:3)
-```
-
-```{r}
-mob_tranA_stat <- extract(mob_tranA_diff,components = "filtered")
-dspec <- spectrum(mob_tranA_stat,spans = c(5,3))
-```
-
-```{r}
-mob_tranA_lo <- tsd(mob_tranA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
-plot(mob_tranA_lo,col = 1:4)
 ```
 
 ## Conclusion
