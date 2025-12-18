@@ -318,7 +318,7 @@ acf(mob_tranA)
 
 ```{r}
 mob_tranA_my <- tsd(mob_tranA, method = "average",order = 26, times = 3)
-plot(mob_tranA_my,col = 1:3)d
+plot(mob_tranA_my,col = 1:3)
 ```
 
 ```{r}
