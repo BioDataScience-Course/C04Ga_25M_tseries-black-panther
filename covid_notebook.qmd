@@ -410,3 +410,5 @@ Cette décomposition LOESS montre une forte chute initiale de la fréquentation 
 <!--% Lorsque toutes les analyses sont réalisées, terminez ce bloc-notes avec 3 à 6 phrases de conclusion en rapport avec ce que vous avez observé dans vos analyses. Quels sont les éléments les plus pertinents que vous retenez ? -->
 
 ...vos conclusions ici...
+
+## référence
