@@ -82,6 +82,11 @@ mob_tranA_lo <- tsd(mob_tranA, method = "loess", s.window = 53, trend = TRUE, ro
 plot(mob_tranA_lo,col = 1:4)
 ```
 
+```{r}
+mob_tranA_loE <- extract(mob_tranA_lo,components = "trend")
+dspecf <- spectrum(mob_tranA_loE,spans = c(5,3))
+```
+
 **mobilité lié aux commerces et aux loisirs(jours ouvrés)**
 
 ```{r}
