@@ -171,7 +171,7 @@ on voit que La ligne verticale pointillée qui correspond à la valeur observée
 cela signifie qu'il existe une tendance temporelle significative dans la fréquentation des lieux de travail. en plus la distribution suit la lois normale
 
 ```{r}
-trend.test(mob_workA.window2020,R = 999) |> 
+trend.test(mob_workA,R = 999) |> 
   plot()
 ```
 
