@@ -95,10 +95,20 @@ mob_tranA_lo <- tsd(mob_tranA, method = "loess", s.window = 53, trend = TRUE, ro
 plot(mob_tranA_lo,col = 1:4)
 ```
 
+La décomposition de la série temporelle réalisée à l’aide de la méthode LOESS met en évidence plusieurs composantes distinctes de l’évolution de la mobilité étudiée. La série observée présente une forte baisse au début de la période analysée, suivie d’une phase de reprise progressive, traduisant l’impact immédiat de la mise en place des premières mesures sanitaires, puis l’adaptation progressive des comportements de déplacement au cours du temps.
+
+La composante de tendance révèle une évolution globalement croissante sur l’ensemble de la période, avec une augmentation marquée après la phase initiale de perturbation. Cette tendance suggère un retour progressif vers des niveaux de mobilité plus élevés, sans toutefois retrouver immédiatement les niveaux de référence pré-pandémiques.
+
+La composante saisonnière met en évidence des fluctuations régulières autour de la tendance, dont l’amplitude reste relativement stable au cours du temps. Ces variations traduisent l’existence de cycles récurrents dans les comportements de mobilité, indépendants des évolutions de long terme, et compatibles avec des effets saisonniers ou périodiques.
+
+Enfin, les résidus apparaissent globalement centrés autour de zéro et de faible amplitude sur la majeure partie de la période, indiquant que la décomposition capture de manière satisfaisante les principales structures de la série. Les écarts plus importants observés en début de période peuvent être interprétés comme une phase transitoire liée au caractère exceptionnel et soudain des premières restrictions sanitaires.
+
 ```{r}
 mob_tranA_loE <- extract(mob_tranA_lo,components = "trend")
 dspecf <- spectrum(mob_tranA_loE,spans = c(5,3))
 ```
+
+L’analyse spectrale a été appliquée à la composante de tendance issue de la décomposition LOESS de la série **mob_tranA**. Le spectre obtenu est dominé par les basses fréquences, indiquant que la variabilité de cette composante est principalement associée à des évolutions lentes de long terme, sans périodicité marquée. Dans le cadre de cette étude, ce résultat suggère que les modifications observées de la mobilité s’inscrivent majoritairement dans une dynamique de long terme, plutôt que dans des variations rapides ou cycliques.
 
 **mobilité lié aux commerces et aux loisirs(jours ouvrés)**
 
