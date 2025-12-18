@@ -177,9 +177,7 @@ abline(h = 0, col = "grey60", lty = 2)
 
 ```
 
-Ce graphique montre une chute très marquée de la mobilité vers les commerces et les loisirs lors des week-ends au début de l’année 2020, atteignant environ −80 %, ce qui correspond aux premiers confinements liés à la COVID-19.\
-Par la suite, on observe une reprise progressive mais irrégulière en 2020 et 2021, avec des phases de baisse temporaires liées aux vagues successives de la pandémie et au renforcement ponctuel des restrictions.\
-À partir de 2022, la mobilité se stabilise globalement autour de valeurs proches ou légèrement supérieures à la période de référence, indiquant un retour progressif à des comportements de déplacement quasi normaux le week-end.
+On observe une chute très importante de la mobilité vers les commerces et les loisirs durant les week-ends au début de l’année 2020, atteignant environ −80 %, en lien avec la mise en place des premiers confinements liés à la COVID-19. Par la suite, la mobilité montre une reprise progressive mais irrégulière tout au long des années 2020 et 2021. En revanche, le début de l’année 2022 est marqué par une nouvelle baisse des déplacements mais moins marqué d’environ -45 %, suivie d’une stabilisation globale autour de valeurs proches, voire légèrement supérieures, à la période de référence, traduisant un retour progressif à des comportements de déplacement quasi normaux le week-end.
 
 Analyse chronologique 1
 
