@@ -132,7 +132,7 @@ Analyse chronologique 1
 
 ```{r}
 mob_workA.window2020 <- window(mob_w_workA,start = 2020, end = 2021)
-loc.workA_2021 <- local.trend(mob_w_workA.window2020)
+loc.workA_2021 <- local.trend(mob_workA.window2020)
 ```
 
 on voit que La ligne verticale pointillée qui correspond à la valeur observée sur les vraies données est clairement à droite de la distribution simulée.
@@ -174,8 +174,8 @@ plot(mob_workA_diff, col = 1:3)
 uuh
 
 ```{r}
-mob_w_workA_stat <- extract(mob_w_workA_diff,components = "filtered")
-dspec <- spectrum(mob_w_workA_stat,spans = c(5,3))
+mob_workA_stat <- extract(mob_workA_diff,components = "filtered")
+dspec <- spectrum(mob_workA_stat,spans = c(5,3))
 ```
 
 yjyg
