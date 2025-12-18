@@ -2,7 +2,7 @@
 title: "Impact de la pandémie de COVID-19 sur la mobilité en Wallonie : une analyse spatio-temporelle (2020–2022)"
 author: "Youmbijeanne,Tsamo voufo melvanie,Linda tchinda,Sotche Merveil,Masala mundambu nelly"
 format:
-  pdf:
+  html:
     documentclass: report
     toc: true
 editor: visual
@@ -122,8 +122,8 @@ plot(mob_retailA_lo,col = 1:4)
 ```
 
 ```{r}
-mob_retailA_stat <- extract(mob_w_retailA_lo,components = "trend")
-spec <- spectrum(mob_w_retailA_stat,spans = c(5,3))
+mob_retailA_stat <- extract(mob_retailA_lo,components = "trend")
+spec <- spectrum(mob_retailA_stat,spans = c(5,3))
 ```
 
 L’analyse spectrale de la série de mobilité liée aux commerces et aux loisirs met en évidence une prédominance des basses fréquences, indiquant que la variabilité observée est principalement associée à des évolutions lentes de long terme. Dans le cadre de ce travail, ce résultat suggère que la pandémie a affecté la mobilité en produisant des changements structurels et progressifs, plutôt que des variations rapides ou périodiques.
@@ -136,13 +136,11 @@ mob_w_retail <- ts(mob_w$retail_and_recreation_percent_change_from_baseline, sta
 
 # Aggrégation par moyenne des valeurs par semaine
 mob_w_retailA <- aggregate(mob_w_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
-
 ```
 
 ```{r}
-#Analyse locale
-mob_w_retailA_l <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
-plot(mob_w_retailA_l,col = 1:4)
+mob_w_retailA_lo <- tsd(mob_w_retailA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
+plot(mob_w_retailA_lo,col = 1:4)
 ```
 
 On observe une chute très marquée au début de l’année 2020, correspondant à la mise en place du premier confinement. Cette phase est suivie d’une reprise progressive de la mobilité. Une seconde baisse, moins prononcée mais bien visible, apparaît par la suite et peut s'expliquer principalement par la propagation fulgurante du variant Omicron et le retour de mesures sanitaires restrictives, traduisant une réduction temporaire des déplacements sans atteindre l’ampleur du choc initial. et enfin on a une stabilisation vers fin 2022.
