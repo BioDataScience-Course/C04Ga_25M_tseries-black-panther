@@ -58,6 +58,8 @@ mob_w$weekdays <- weekdays(as.POSIXct(mob_w$date))
 mob_w[mob_w$weekdays == "Monday" | mob_w$weekdays == "Tuesday" | mob_w$weekdays == "Wednesday" | mob_w$weekdays == "Thursday" | mob_w$weekdays == "Friday", 2:7] <- NA
 ```
 
+**mobilité lié aux stations de transport (jours ouvrés)**
+
 ```{r}
 # création de la série temporelle
 mob_transit <- ts(mobility$transit_stations_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
@@ -80,9 +82,30 @@ mob_tranA_lo <- tsd(mob_tranA, method = "loess", s.window = 53, trend = TRUE, ro
 plot(mob_tranA_lo,col = 1:4)
 ```
 
-```{r}
+**mobilité lié aux commerces et aux loisirs(jours ouvrés)**
 
+```{r}
+# création de la série temporelle 
+mob_retail <- ts(mobility$retail_and_recreation_percent_change_from_baseline, start = c(2020, 46), frequency = 365)
+plot(mob_retail, main = "Mobilité liée aux commerces et loisirs en Wallonie (jours ouvrés)",
+  ylab = "Variation (%)",
+  xlab = "Temps")
+# Aggrégation par moyenne des valeurs par semaine
+mob_retailA <- aggregate(mob_retail, 52, FUN = collapse::fmean, ts.eps = 1/52)
+plot(mob_retailA,main = "Mobilité liée aux commerces et loisirs en Wallonie (jours ouvrés)",
+  ylab = "Variation (%) par rapport à la période de référence",
+  xlab = "Temps"
+)
+abline(h = 0, col = "grey60", lty = 2)
 ```
+
+```{r}
+# calcul de la méthode par loes
+mob_retailA_lo <- tsd(mob_retailA, method = "loess", s.window = 53, trend = TRUE, robust = TRUE)
+plot(mob_retailA_lo,col = 1:4)
+```
+
+**mobilité lié aux commerces et aux loisirs(week-end)**
 
 ## Discussion et Conclusion
 
